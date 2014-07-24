@@ -22,15 +22,24 @@ DoubleCircularDrive.prototype.step = function(t) {
 };
 
 DoubleCircularDrive.prototype.render = function(context) {
-    context.strokeStyle = "#F00";
+    context.strokeStyle = "rgba(255,0,0,0.25)";
+    context.fillStyle = "rgba(0,0,0,0.5)";
     
+    // inner drive's path
     context.beginPath();
     context.arc(this.position.x, this.position.y, this.radius, 0, 2 * Math.PI);
     context.stroke();
     
+    // inner drive's mount point
     context.beginPath();
-    context.arc(this.mountPoint.x, this.mountPoint.y, 5, 0, 2 * Math.PI);
+    context.arc(this.innerDrive.position.x, this.innerDrive.position.y, 5, 0, 2 * Math.PI);
     context.fill();
     
+    // outer bounds
+    context.strokeStyle = "rgba(255,0,0,0.5)";
+    context.beginPath();
+    context.arc(this.position.x, this.position.y, this.radius + this.innerDrive.radius, 0, 2 * Math.PI);
+    context.stroke();
+        
     this.innerDrive.render(context);
 };

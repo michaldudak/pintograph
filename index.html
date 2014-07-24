@@ -3,10 +3,11 @@
     <head>
         <title>Pintograph simulation</title>
     </head>
-    <body>
-        <button id="step" style="position: relative; z-index: 2">Step</button>
-        <button id="run" style="position: relative; z-index: 2">Run</button>
-
+    <body style="background: black;">
+        <button id="step" style="position: fixed; z-index: 2; left: 10px">Step</button>
+        <button id="run" style="position: fixed; z-index: 2; left: 100px">Run</button>
+        <button id="runFast" style="position: fixed; z-index: 2; left: 190px">Run fast</button>
+       
         <canvas id="canvas" width="1000" height="1000" style="position: absolute; top: 0; left: 0; z-index: 0;"></canvas>
         <canvas id="overlay" width="1000" height="1000" style="position: absolute; top: 0; left: 0; z-index: 1;"></canvas>
 
@@ -14,57 +15,55 @@
         <script src="FixedDrive.js"></script>
         <script src="CircularDrive.js"></script>
         <script src="DoubleCircularDrive.js"></script>
-        <script src="simulation.js"></script>
+        <script src="SimpleArms.js"></script>
+        <script src="SimplePen.js"></script>
+        <script src="RainbowPen.js"></script>
+        <script src="Simulation.js"></script>
         
         <script type="text/javascript">
             var driveA = new DoubleCircularDrive({
                 position: {x: 300, y: 800},
-                radius: 150,
-                startingAngle: -0,
-                rpm: -10,
-                armLength: 750,
-                innerDrive: new DoubleCircularDrive({                   
+                radius: 100,
+                startingAngle: 0,
+                rpm: -8,
+                innerDrive: new CircularDrive({                   
                     position: {x: 500, y: 800},
-                    radius: 60,
-                    startingAngle: -90,
-                    rpm: 33,
-                    innerDrive: new CircularDrive({
-                        position: {x: 500, y: 800},                
-                        radius: 40,
-                        rpm: -9,
-                        startingAngle: 90
-                    })
+                    radius: 100,
+                    startingAngle: 180,
+                    rpm: -4                  
                 })
             });
 
-            var driveB = new CircularDrive({
-                position: {x: 700, y: 800},                
-                armLength: 550,
+            var driveB = new DoubleCircularDrive({
+                position: {x: 700, y: 800},
                 radius: 100,
-                rpm: 10,
-                startingAngle: 0
-                
+                startingAngle: 0,
+                rpm: 8,
+                innerDrive: new CircularDrive({                   
+                    position: {x: 500, y: 800},
+                    radius: 100,
+                    startingAngle: 180,
+                    rpm: 16.02             
+                })
             });
+            
+            var arms = new SimpleArms(driveA, driveB, 600, 600);
+            
+            var pen = new SimplePen(arms, "rgba(255,255,255,0.15)");
+            
+            var simulation = new Simulation(driveA, driveB, arms, pen, 30);
 
-
-            var t = performance.now();
             var canvas = document.getElementById('canvas');
-            var ctx = canvas.getContext('2d');
-            var initialPosition = getMidpoint(driveA, driveB, t);
+            var drawingContext = canvas.getContext('2d');
 
             var overlayCanvas = document.getElementById('overlay');
-            var octx = overlayCanvas.getContext('2d');
+            var overlayContext = overlayCanvas.getContext('2d');
+            
+            var hue = 150;
 
             function simulate(repeat) {
-                ctx.strokeStyle = "#000";				
-                ctx.beginPath();
-
-                var pen = getMidpoint(driveA, driveB, t);
-                ctx.moveTo(initialPosition.x, initialPosition.y);
-                ctx.lineTo(pen.x, pen.y);
-                t += 30;
-                initialPosition = pen;				
-                ctx.stroke();			
+                simulation.step();
+                simulation.draw(drawingContext);
 
                 if (repeat) {
                     requestAnimationFrame(simulate);
@@ -75,35 +74,24 @@
             }
 
             function overlay() {
-
-                octx.clearRect(0, 0, 1000, 1000);
-
-                driveA.render(octx);
-                driveB.render(octx);				
-
-                var penPoint = getMidpoint(driveA, driveB, t);
-                octx.beginPath();
-                octx.arc(penPoint.x, penPoint.y, 3, 0, 2 * Math.PI);
-                octx.fill();
-
-                octx.strokeStyle = "#06F";
-                octx.lineWidth = 2;
-                octx.beginPath();
-                octx.moveTo(driveA.mountPoint.x, driveA.mountPoint.y);
-                octx.lineTo(penPoint.x, penPoint.y);
-                octx.lineTo(driveB.mountPoint.x, driveB.mountPoint.y);
-                octx.stroke();
+                overlayContext.clearRect(0, 0, 1000, 1000);
+                simulation.drawTools(overlayContext);
             }
 
             document.getElementById("step").addEventListener("click", function() {
                 simulate(false);
             });
             
-             document.getElementById("run").addEventListener("click", function() {
+            document.getElementById("run").addEventListener("click", function() {
                 simulate(true);
             });
+            
+            document.getElementById("runFast").addEventListener("click", function() {
+                for (var i = 0; i < 50; ++i) {                    
+                    simulate(true);
+                }
+            });
 
-            simulate();
         </script>
     </body>
 </html>

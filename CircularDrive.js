@@ -19,7 +19,8 @@ CircularDrive.prototype.step = function step(t) {
 }
 
 CircularDrive.prototype.render = function(context) {    
-    octx.strokeStyle = "#F00";
+    context.strokeStyle = "#F00";
+    context.fillStyle = "#000";
     
     context.beginPath();
     context.arc(this.position.x, this.position.y, this.radius, 0, 2 * Math.PI);

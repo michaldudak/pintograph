@@ -1,18 +1,41 @@
-function getMidpoint(driveA, driveB, t) {
+function Simulation(driveA, driveB, arms, pen, timeStep) {
+
+    function realTimeStep() {
+        return performance.now();
+    }
+
+    function fixedTimeStep() {
+        currentTime += this.timeStep;
+        return currentTime;
+    }
+
+    this.driveA = driveA;
+    this.driveB = driveB;
+    this.arms = arms;
+    this.pen = pen;
+    this.timeStep = timeStep;
+
+    var currentTime = this.timeStep ? 0 : performance.now();
+
+    this.stepTime = this.timeStep ? fixedTimeStep : realTimeStep;
+}
+
+Simulation.prototype.step = function() {
+    var t = this.stepTime();
+
     driveA.step(t);
     driveB.step(t);
-    
-	var mountPointA = driveA.mountPoint;
-	var mountPointB = driveB.mountPoint;
+    arms.step(t);
+    pen.step(t);
+};
 
-	var d = MathUtils.distance(mountPointA, mountPointB);
-	if (d < MathUtils.EPSILON) {
-		throw new Error("Mount points are placed too close to each other.");
-	}
+Simulation.prototype.draw = function(context) {
+    pen.draw(context);
+};
 
-	if (d < Math.abs(driveA.armLength - driveB.armLength)) {
-		throw new Error("Arms are too short.");
-	}
-
-	return MathUtils.circleCircleIntersection(mountPointA, driveA.armLength, mountPointB, driveB.armLength);
-}
+Simulation.prototype.drawTools = function(context) {
+    driveA.render(context);
+    driveB.render(context);
+    arms.render(context);
+    pen.render(context);
+};
