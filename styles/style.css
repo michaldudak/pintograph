@@ -1,0 +1,65 @@
+body {
+    background: #000;
+	font-family: "Segoe UI";
+	color: #eee;
+}
+
+.controls {
+    position: fixed;
+    width: 200px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    border-left: 1px #333 solid;
+	padding: 10px;
+	box-sizing: border-box;
+}
+
+.controls div {
+	height: 40px;
+	margin-bottom: 10px;
+	margin-bottom: 10px;
+}
+
+.controls button {
+	display: block;
+	box-sizing: border-box;
+	width: 180px;
+	border: none;
+	background: #333;
+	color: #eee;
+	height: 40px;
+	margin-bottom: 10px;
+	font-family: "Segoe UI";
+}
+
+.controls button:hover {
+	background: rgb(98, 234, 189);
+	cursor: pointer;
+	color: #222;
+}
+
+.backdrop {
+	background: #111;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 200px;
+	bottom: 0;
+	z-index: 0;
+}
+
+.backdrop canvas {
+	display: block;
+	position: absolute;
+	
+}
+
+#drawingArea {
+	background: #000;
+	z-index: 0;
+}
+
+#overlay {
+	z-index: 1;
+}

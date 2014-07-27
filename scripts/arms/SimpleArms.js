@@ -18,7 +18,8 @@ SimpleArms.prototype.step = function(t) {
 		throw new Error("Arms are too short.");
 	}
 
-	this.mountPoint = MathUtils.circleCircleIntersection(mountPointA, this.lengthA, mountPointB, this.lengthB);
+    var possibleMountPoints = MathUtils.circleCircleIntersection(mountPointA, this.lengthA, mountPointB, this.lengthB);
+	this.mountPoint = this.flip ? possibleMountPoints[1] : possibleMountPoints[0];
 };
 
 SimpleArms.prototype.render = function(context) {
@@ -28,7 +29,7 @@ SimpleArms.prototype.render = function(context) {
     context.fill();
 
     // arms
-    context.strokeStyle = "#06F";
+    context.strokeStyle = "rgba(0, 128, 255, 0.4)";
     context.lineWidth = 2;
     context.beginPath();
     context.moveTo(this.driveA.mountPoint.x, this.driveA.mountPoint.y);

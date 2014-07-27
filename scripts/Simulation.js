@@ -34,7 +34,12 @@ Simulation.prototype.draw = function(context) {
 };
 
 Simulation.prototype.drawTools = function(context) {
-    driveA.render(context);
+    var width = context.canvas.width;
+	var height = context.canvas.height;
+	
+	context.clearRect(0, 0, width, height);
+	
+	driveA.render(context);
     driveB.render(context);
     arms.render(context);
     pen.render(context);

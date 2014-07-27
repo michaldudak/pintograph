@@ -4,7 +4,7 @@ function RainbowPen(arms, opacity, hueChangePerSegment) {
     
     this.previousMountPoint = null;
     this.mountPoint = null;
-    this.hue = 0;
+    this.hue = 120;
     this.hueChangePerSegment = hueChangePerSegment;
 }
 

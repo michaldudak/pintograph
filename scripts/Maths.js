@@ -50,11 +50,15 @@
             p2.x = p0.x + (a * (p1.x - p0.x)) / d;
             p2.y = p0.y + (a * (p1.y - p0.y)) / d;
 
-            var p3 = {};
-            p3.x = p2.x + (h * (p1.y - p0.y)) / d;
-            p3.y = p2.y - (h * (p1.x - p0.x)) / d;
+            var p3_1 = {};
+            p3_1.x = p2.x + (h * (p1.y - p0.y)) / d;
+            p3_1.y = p2.y - (h * (p1.x - p0.x)) / d;
+            
+            var p3_2 = {};
+            p3_2.x = p2.x - (h * (p1.y - p0.y)) / d;
+            p3_2.y = p2.y + (h * (p1.x - p0.x)) / d;
 
-            return p3;
+            return [p3_1, p3_2];
         }
     }
 }());

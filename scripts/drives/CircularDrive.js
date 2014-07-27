@@ -8,19 +8,23 @@ var CircularDrive = function(props) {
 	}
     
     this.step(0);
+	this.currentAngle = this.startingAngle;
 };
 
 CircularDrive.prototype.step = function step(t) {
-    var currentAngle = MathUtils.degToRad((this.startingAngle + (this.rpm * 0.006 * t) % 360));
-	var x = this.radius * Math.cos(currentAngle) + this.position.x;
-	var y = this.radius * Math.sin(currentAngle) + this.position.y;
+	var deltaT = t - (this.previousT || 0);
+    this.currentAngle = (this.currentAngle + this.rpm * 0.006 * deltaT) % 360;
+	var currentAngleRad = MathUtils.degToRad(this.currentAngle);
+	var x = this.radius * Math.cos(currentAngleRad) + this.position.x;
+	var y = this.radius * Math.sin(currentAngleRad) + this.position.y;
 
+	this.previousT = t;
 	this.mountPoint = { x: x, y: y };
 }
 
 CircularDrive.prototype.render = function(context) {    
-    context.strokeStyle = "#F00";
-    context.fillStyle = "#000";
+    context.strokeStyle = "rgba(255,128,0,0.4)";
+    context.fillStyle = "rgba(255,255,255,0.4)";
     
     context.beginPath();
     context.arc(this.position.x, this.position.y, this.radius, 0, 2 * Math.PI);
