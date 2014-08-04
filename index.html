@@ -6,37 +6,67 @@
 		<link href="styles/style.css" rel="stylesheet" />
 	</head>
 	<body>
-		<div class="controls">
-			<div>
-				<label for="drawOverlay"><input type="checkbox" id="drawOverlay" />Draw overlay</label>
-			</div>
+		<div class="controls">			
 			<button id="step">Step</button>
 			<button id="run">Run</button>
 			<button id="runFast">Run faster</button>
 			<button id="pause">Pause</button>
 			<button id="clear">Clear</button>
+			<div>
+				<label for="drawOverlay"><input type="checkbox" id="drawOverlay" />Draw overlay</label>
+			</div>
 			
 			<fieldset>
 				<legend>Drive A</legend>
-				<input id="driveARadius" type="number" placeholder="Drive A radius" />
-				<input id="driveARpm" type="number" placeholder="Drive A RPM" step="0.01" />
-				<fieldset>
-					<legend>Subdrive A</legend>
-					<input id="subdriveARadius" type="number" placeholder="Subdrive A radius" />
-					<input id="subdriveARpm" type="number" placeholder="Subdrive A RPM" step="0.01" />
-				</fieldset>
+				<div>
+					<label for="driveARadius">Radius</label>
+					<input id="driveARadius" type="number" placeholder="Drive A radius" />
+				</div>
+				<div>
+					<label for="driveARpm">Speed</label>
+					<input id="driveARpm" type="number" placeholder="Drive A RPM" step="0.01" />
+				</div>				
 			</fieldset>
 			
 			<fieldset>
-				<legend>Drive B</legend>
-				<input id="driveBRadius" type="number" placeholder="Drive B radius" />
-				<input id="driveBRpm" type="number" placeholder="Drive B RPM" step="0.01" />
-				<fieldset>
-					<legend>Subdrive B</legend>
-					<input id="subdriveBRadius" type="number" placeholder="Subdrive B radius" />
-					<input id="subdriveBRpm" type="number" placeholder="Subdrive B RPM" step="0.01" />
+					<legend>Subdrive A</legend>
+					<div>
+						<label for="subdriveARadius">Radius</label>
+						<input id="subdriveARadius" type="number" placeholder="Subdrive A radius" />
+					</div>
+					<div>
+						<label for="subdriveARpm">Speed</label>
+						<input id="subdriveARpm" type="number" placeholder="Subdrive A RPM" step="0.01" />
+					</div>
 				</fieldset>
-			</fieldset>			
+			
+			<fieldset>
+				<legend>Drive B</legend>
+				<div>
+					<label for="driveBRadius">Radius</label>
+					<input id="driveBRadius" type="number" placeholder="Drive B radius" />
+				</div>
+				<div>
+					<label for="driveBRpm">Speed</label>
+					<input id="driveBRpm" type="number" placeholder="Drive B RPM" step="0.01" />
+				</div>				
+			</fieldset>
+			
+			<fieldset>
+				<legend>Subdrive B</legend>
+				<div>
+					<label for="subdriveBRadius">Radius</label>
+					<input id="subdriveBRadius" type="number" placeholder="Subdrive B radius" />
+				</div>
+				<div>
+					<label for="subdriveBRpm">Speed</label>
+					<input id="subdriveBRpm" type="number" placeholder="Subdrive B RPM" step="0.01" />
+				</div>
+			</fieldset>
+			
+			<aside>
+				This is a pintograph simulator by <a href="http://dudak.pl">Michał Dudak</a>. Read more about it on <a href="https://github.com/doodack/pintograph">its GitHub page</a>.
+			</aside>
 		</div>
 		
 		<div class="backdrop">
@@ -44,128 +74,13 @@
 			<canvas id="overlay" width="1500" height="950"></canvas>
 		</div>
 
-		<script src="scripts/Maths.js"></script>
+		<script src="scripts/MathUtils.js"></script>
 		<script src="scripts/drives/CircularDrive.js"></script>
 		<script src="scripts/drives/DoubleCircularDrive.js"></script>
 		<script src="scripts/arms/SimpleArms.js"></script>
 		<script src="scripts/pens/SimplePen.js"></script>
 		<script src="scripts/pens/RainbowPen.js"></script>
 		<script src="scripts/Simulation.js"></script>
-
-		<script type="text/javascript">		
-			var driveA = new DoubleCircularDrive({
-				position: {x: 200, y: 200},
-				radius: 100,
-				startingAngle: 0,
-				rpm: 8,
-				innerDrive: new CircularDrive({                   
-					position: {x: 500, y: 800},
-					radius: 66,
-					startingAngle: 0,
-					rpm: -12
-				})
-			});
-
-			var driveB = new DoubleCircularDrive({
-				position: {x: 200, y: 800},
-				radius: 100,
-				startingAngle: 0,
-				rpm: 8,
-				innerDrive: new CircularDrive({                   
-					position: {x: 500, y: 800},
-					radius: 66,
-					startingAngle: 0,
-					rpm: -12
-				})
-			});
-
-			var arms = new SimpleArms(driveA, driveB, 600, 600);
-			arms.flip = false;
-
-			//var pen = new SimplePen(arms, "rgba(255,255,255,0.25)");
-			var pen = new RainbowPen(arms, 0.25, 0.01);
-
-			var pause = false;
-			var drawOverlay = false;
-			
-			var simulation = new Simulation(driveA, driveB, arms, pen, 30);
-
-			var drawingArea = document.getElementById('drawingArea');
-			var drawingContext = drawingArea.getContext('2d');
-
-			var overlayCanvas = document.getElementById('overlay');
-			var overlayContext = overlayCanvas.getContext('2d');
-
-			function simulate(repeat) {
-				simulation.step();
-				simulation.draw(drawingContext);
-
-				if (repeat && !pause) {
-					requestAnimationFrame(function() { simulate(true); });
-					requestAnimationFrame(overlay);
-				} else {
-					overlay();
-				}
-			}
-
-			function overlay() {
-				if (drawOverlay) {
-					simulation.drawTools(overlayContext);
-				} else {
-					overlayContext.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
-				}
-			}
-
-			document.getElementById("step").addEventListener("click", function() {
-				simulate(false);
-			});
-
-			document.getElementById("run").addEventListener("click", function() {
-				pause = false;
-				simulate(true);
-			});
-
-			document.getElementById("runFast").addEventListener("click", function() {
-				pause = false;
-				for (var i = 0; i < 50; ++i) {                    
-					simulate(true);
-				}
-			});
-			
-			document.getElementById("pause").addEventListener("click", function() {
-				pause = true;
-			});
-			
-			document.getElementById("clear").addEventListener("click", function() {
-				drawingContext.clearRect(0, 0, drawingArea.width, drawingArea.height);
-			});
-			
-			document.getElementById("drawOverlay").addEventListener("change", function(e) {
-				drawOverlay = e.target.checked;
-			});
-			
-			document.getElementById("drawOverlay").checked = drawOverlay;
-			
-			function bindProperty(controlId, object, propertyName) {
-				var control = document.getElementById(controlId);
-				control.addEventListener("change", function(e) {
-					object[propertyName] = e.target.value;
-				});
-				
-				control.value = object[propertyName];
-			}
-			
-			bindProperty("driveARadius", driveA, "radius");
-			bindProperty("driveARpm", driveA, "rpm");
-			bindProperty("subdriveARadius", driveA.innerDrive, "radius");
-			bindProperty("subdriveARpm", driveA.innerDrive, "rpm");
-			
-			bindProperty("driveBRadius", driveB, "radius");
-			bindProperty("driveBRpm", driveB, "rpm");
-			bindProperty("subdriveBRadius", driveB.innerDrive, "radius");
-			bindProperty("subdriveBRpm", driveB.innerDrive, "rpm");
-
-
-		</script>
+		<script src="scripts/setup.js"></script>
 	</body>
 </html>

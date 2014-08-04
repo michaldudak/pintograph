@@ -2,17 +2,20 @@ body {
     background: #000;
 	font-family: "Segoe UI";
 	color: #eee;
+	font-size: 14px;
 }
 
 .controls {
     position: fixed;
-    width: 200px;
+    width: 260px;
     top: 0;
     right: 0;
     bottom: 0;
     border-left: 1px #333 solid;
 	padding: 10px;
 	box-sizing: border-box;
+	z-index: 1;
+	background: rgba(0,0,0,0.4);
 }
 
 .controls div {
@@ -21,12 +24,60 @@ body {
 	margin-bottom: 10px;
 }
 
+.controls fieldset {
+	box-sizing: border-box;
+	border: none;
+	width: 100%;
+	margin: 20px 0;
+	padding: 0;
+	font-size: 0;
+}
+
+.controls fieldset * {
+	font-size: 14px;
+}
+
+.controls fieldset div {
+	display: inline-block;
+	width: 50%;
+	padding: 0 4px;
+	box-sizing: border-box;
+}
+
+.controls legend {
+	font-size: 16px;
+	color: #1ff5c2;
+}
+
+.controls label {
+	color: #aaa;
+	font-weight: bold;
+	font-size: 12px;
+}
+
+.controls input[type=number], 
+.controls input[type=text] {
+	font-family: "Segoe UI", "Arial", sans-serif;
+	box-sizing: border-box;
+	width: 100%;
+	border: none;
+	border-bottom: 2px solid #999;
+	background: transparent;
+	color: #fff;
+	padding: 4px;
+}
+
+.controls input[type=number]:hover, 
+.controls input[type=text]:hover {
+	background: rgba(255,255,255,0.15);
+}
+
 .controls button {
 	display: block;
 	box-sizing: border-box;
-	width: 180px;
+	width: 240px;
 	border: none;
-	background: #333;
+	background: rgba(255,255,255,0.2);
 	color: #eee;
 	height: 40px;
 	margin-bottom: 10px;
@@ -34,9 +85,18 @@ body {
 }
 
 .controls button:hover {
-	background: rgb(98, 234, 189);
+	background: #1ff5c2;
 	cursor: pointer;
 	color: #222;
+}
+
+.controls aside {
+	margin-top: 40px;
+}
+
+.controls a {
+	color: #1ff5c2;
+	text-decoration: none;
 }
 
 .backdrop {
@@ -44,7 +104,7 @@ body {
 	position: fixed;
 	top: 0;
 	left: 0;
-	right: 200px;
+	right: 260px;
 	bottom: 0;
 	z-index: 0;
 }
