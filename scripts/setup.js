@@ -16,11 +16,11 @@ var driveB = new DoubleCircularDrive({
 	radius: 100,
 	startingAngle: 0,
 	rpm: 8,
-	innerDrive: new CircularDrive({                   
+	innerDrive: new CircularDrive({
 		position: {x: 500, y: 800},
 		radius: 100,
 		startingAngle: 180,
-		rpm: 16.02             
+		rpm: 16.02
 	})
 });
 
@@ -41,9 +41,19 @@ var drawingContext = drawingArea.getContext('2d');
 var overlayCanvas = document.getElementById('overlay');
 var overlayContext = overlayCanvas.getContext('2d');
 
+var counter = 0;
+
 function simulate(repeat) {
 	simulation.step();
 	simulation.draw(drawingContext);
+	
+	if (counter++ > 1000) {
+		drawingContext.globalAlpha = Math.random() / 20;
+		drawingContext.fillStyle = "rgb(0,0,0)";
+		drawingContext.fillRect(0, 0, drawingArea.width, drawingArea.height);
+		counter = 0;
+		drawingContext.globalAlpha = 1;
+	}
 
 	if (repeat && !pause) {
 		requestAnimationFrame(function() { simulate(true); });
@@ -72,7 +82,7 @@ document.getElementById("run").addEventListener("click", function() {
 
 document.getElementById("runFast").addEventListener("click", function() {
 	pause = false;
-	for (var i = 0; i < 50; ++i) {                    
+	for (var i = 0; i < 50; ++i) {
 		simulate(true);
 	}
 });
