@@ -33,7 +33,7 @@ DoubleCircularDrive.prototype.step = function(t) {
 
 DoubleCircularDrive.prototype.render = function(context) {
 	context.strokeStyle = "rgba(255,128,0,0.2)";
-    context.fillStyle = "rgba(255,255,255,0.25)";
+	context.fillStyle = "rgba(255,255,255,0.25)";
 
 	// inner drive's path
 	context.beginPath();
