@@ -18,7 +18,7 @@ function setupUI(simulation) {
 	});
 
 	document.getElementById("clear").addEventListener("click", function() {
-		overlayContext.clearRect(0, 0, drawingArea.width, drawingArea.height);
+		drawingContext.clearRect(0, 0, drawingArea.width, drawingArea.height);
 	});
 
 	document.getElementById("drawOverlay").addEventListener("change", function(e) {
@@ -29,13 +29,18 @@ function setupUI(simulation) {
 			simulation.drawTools(overlayContext);
 		}
 	});
+	
+	document.getElementById("fade").addEventListener("change", function(e) {
+		simulation.fadeInterval = e.target.checked ? 6 : 0;
+	});
 
-	document.getElementById("drawOverlay").checked = drawOverlay;
+	document.getElementById("drawOverlay").checked = simulation.renderTools;
+	document.getElementById("fade").checked = !!simulation.fadeInterval;
 
 	function bindNumberProperty(controlId, object, propertyName) {
 		var control = document.getElementById(controlId);
 		control.addEventListener("input", function(e) {
-			object[propertyName] = e.target.valueAsNumber || 0;
+			object[propertyName] = +e.target.value || 0;
 		});
 
 		control.value = object[propertyName];
