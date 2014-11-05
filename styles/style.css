@@ -1,21 +1,22 @@
 body {
-    background: #000;
+	background: #000;
 	font-family: "Segoe UI";
 	color: #eee;
 	font-size: 14px;
 }
 
 .controls {
-    position: fixed;
-    width: 260px;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    border-left: 1px #333 solid;
+	position: fixed;
+	width: 260px;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	border-left: 1px #333 solid;
 	padding: 10px;
 	box-sizing: border-box;
 	z-index: 1;
 	background: rgba(0,0,0,0.4);
+	overflow: auto;
 }
 
 .controls div {
@@ -112,7 +113,7 @@ body {
 .backdrop canvas {
 	display: block;
 	position: absolute;
-	
+
 }
 
 #drawingArea {
