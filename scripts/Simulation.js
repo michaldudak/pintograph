@@ -96,10 +96,14 @@ Simulation.prototype.run = function(drawingContext, toolsDrawingContext) {
 	var frameCounter = 0;
 	
 	function runStep() {
-		if (frameCounter++ >= self.fadeInterval) {
+		if (self.fadeInterval) {
+			if (frameCounter++ >= self.fadeInterval) {
+				frameCounter = 0;
+				drawingContext.fillStyle = self.fadeColor;
+				drawingContext.fillRect(0, 0, drawingArea.width, drawingArea.height);
+			}
+		} else {
 			frameCounter = 0;
-			drawingContext.fillStyle = self.fadeColor;
-			drawingContext.fillRect(0, 0, drawingArea.width, drawingArea.height);
 		}
 		
 		self.runOnce(drawingContext, toolsDrawingContext);
