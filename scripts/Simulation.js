@@ -26,12 +26,12 @@ Simulation.prototype.step = function() {
 	try {
 		var t = this.stepTime();
 
-		driveA.step(t);
-		driveB.step(t);
-		arms.step(t);
-		pen.step(t);
+		this.driveA.step(t);
+		this.driveB.step(t);
+		this.arms.step(t);
+		this.pen.step(t);
 
-		drawBuffer.push({ x: pen.mountPoint.x, y: pen.mountPoint.y, style: pen.lineStyle });
+		drawBuffer.push({ x: this.pen.mountPoint.x, y: this.pen.mountPoint.y, style: this.pen.lineStyle });
 	} catch (err) {
 		console.warn(err);
 	}
@@ -63,10 +63,10 @@ Simulation.prototype.drawTools = function(context) {
 
 	context.clearRect(0, 0, width, height);
 
-	driveA.render(context);
-	driveB.render(context);
-	arms.render(context);
-	pen.render(context);
+	this.driveA.render(context);
+	this.driveB.render(context);
+	this.arms.render(context);
+	this.pen.render(context);
 };
 
 Simulation.prototype.runSingleStep = function(drawingContext, toolsDrawingContext) {
@@ -100,7 +100,7 @@ Simulation.prototype.run = function(drawingContext, toolsDrawingContext) {
 			if (frameCounter++ >= self.fadeInterval) {
 				frameCounter = 0;
 				drawingContext.fillStyle = self.fadeColor;
-				drawingContext.fillRect(0, 0, drawingArea.width, drawingArea.height);
+				drawingContext.fillRect(0, 0, drawingContext.canvas.width, drawingContext.canvas.height);
 			}
 		} else {
 			frameCounter = 0;
