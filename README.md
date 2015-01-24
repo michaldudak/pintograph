@@ -3,7 +3,7 @@
 This is a pintograph simulator inspired by [Alfred Hoehn's](https://www.youtube.com/user/alfredhoehn) machines.
 
 ##Usage
-See it in action on https://doodack.github.io/pintograph.
+See it in action on https://michaldudak.github.io/pintograph.
 Currently the GUI allows to set several parameters of the drives - radius and rotation speed. More customization options are to come.
 To start, simply press the **Run** button. If you'd like to see the pintograph drives and arms, select the **Show overlay** checkbox.
 Each subsequent press in the **Run** button speeds up the animation. The **Run faster** button makes it even faster. The **Step** button advances the animation by just one step (the animation has to be paused to be able to see its effect).
