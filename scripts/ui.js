@@ -5,23 +5,27 @@ function setupUI(simulation) {
 	var overlayCanvas = document.getElementById("overlay");
 	var overlayContext = overlayCanvas.getContext("2d");
 
-	document.getElementById("step").addEventListener("click", function() {
+	function addListener(id, event, listener) {
+		document.getElementById(id).addEventListener(event, listener);
+	}
+
+	addListener("step", "click", function () {
 		simulation.runSingleStep(drawingContext, overlayContext);
 	});
 
-	document.getElementById("run").addEventListener("click", function() {
+	addListener("run", "click", function () {
 		simulation.run(drawingContext, overlayContext);
 	});
 
-	document.getElementById("pause").addEventListener("click", function() {
+	addListener("pause", "click", function() {
 		simulation.pause();
 	});
 
-	document.getElementById("clear").addEventListener("click", function() {
+	addListener("clear", "click", function() {
 		drawingContext.clearRect(0, 0, drawingArea.width, drawingArea.height);
 	});
 
-	document.getElementById("drawOverlay").addEventListener("change", function(e) {
+	addListener("drawOverlay", "change", function(e) {
 		simulation.renderTools = e.target.checked;
 		if (!e.target.checked) {
 			overlayContext.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
@@ -30,12 +34,39 @@ function setupUI(simulation) {
 		}
 	});
 	
-	document.getElementById("fade").addEventListener("change", function(e) {
+	addListener("fade", "change", function(e) {
 		simulation.fadeInterval = e.target.checked ? 6 : 0;
+	});
+
+	addListener("settings", "click", function() {
+		var controlsPanel = document.querySelector(".controls");
+		controlsPanel.classList.toggle("expanded");
 	});
 
 	document.getElementById("drawOverlay").checked = simulation.renderTools;
 	document.getElementById("fade").checked = !!simulation.fadeInterval;
+
+	function resizeCanvas() {
+		var img = drawingContext.getImageData(0, 0, drawingArea.width, drawingArea.height);
+		drawingArea.width = window.innerWidth;
+		drawingArea.height = window.innerHeight;
+		drawingContext.putImageData(img, 0, 0);
+
+		overlayCanvas.width = window.innerWidth;
+		overlayCanvas.height = window.innerHeight;
+	}
+
+	var resizeDelay;
+
+	window.addEventListener("resize", function() {
+		if (resizeDelay) {
+			clearTimeout(resizeDelay);
+		}
+
+		resizeDelay = setTimeout(resizeCanvas, 150);
+	});
+
+	resizeCanvas();
 
 	function bindNumberProperty(controlId, object, propertyName) {
 		var control = document.getElementById(controlId);

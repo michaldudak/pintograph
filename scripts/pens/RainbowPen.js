@@ -20,7 +20,7 @@ RainbowPen.prototype.draw = function(context) {
 	if (this.previousMountPoint === null || this.mountPoint === null) {
 		return;
 	}
-	
+
 	context.strokeStyle = this.lineStyle;
 	context.beginPath();
 	context.moveTo(this.previousMountPoint.x, this.previousMountPoint.y);

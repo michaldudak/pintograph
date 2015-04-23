@@ -1,25 +1,29 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8" />
 		<title>Pintograph simulation</title>
-		<link href="styles/style.css" rel="stylesheet" />
+		<link href="styles/style.css" rel="stylesheet"/>
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	</head>
 	<body>
-		<div class="controls">
-			<button id="step">Step</button>
-			<button id="run">Run</button>
-			<button id="pause">Pause</button>
-			<button id="clear">Clear</button>
-			<div>
-				<label for="drawOverlay"><input type="checkbox" id="drawOverlay" />Draw overlay</label>
-			</div>
-			<div>
-				<label for="fade"><input type="checkbox" id="fade" />Fade to black</label>
-			</div>
-			
+	<div class="controls">
+		<div class="basic">
+			<button id="step" title="Step"><i class="fa fa-fw fa-step-forward"></i></button>
+			<button id="run" title="Run"><i class="fa fa-fw fa-play"></i></button>
+			<button id="pause" title="Pause"><i class="fa fa-fw fa-pause"></i></button>
+			<button id="clear" title="Clear"><i class="fa fa-fw fa-refresh"></i></button>
+			<button id="settings" title="Settings"><i class="fa fa-fw fa-cog"></i></button>
+		</div>
+		<div class="advanced">
 			<fieldset>
 				<legend>Global controls</legend>
+				<div>
+					<label for="drawOverlay"><input type="checkbox" id="drawOverlay" />Draw overlay</label>
+				</div>
+				<div>
+					<label for="fade"><input type="checkbox" id="fade" />Fade to black</label>
+				</div>
 				<div>
 					<label for="stepsPerFrame">Steps per frame</label>
 					<input id="stepsPerFrame" type="number" min="1" step="1" />
@@ -29,7 +33,7 @@
 					<input id="timeStep" type="number" step="1" min="1" />
 				</div>
 			</fieldset>
-			
+
 			<fieldset>
 				<legend>Drive A</legend>
 				<div>
@@ -49,19 +53,19 @@
 					<input id="driveAY" type="number" />
 				</div>
 			</fieldset>
-			
+
 			<fieldset>
-					<legend>Subdrive A</legend>
-					<div>
-						<label for="subdriveARadius">Radius</label>
-						<input id="subdriveARadius" type="number" placeholder="Subdrive A radius" />
-					</div>
-					<div>
-						<label for="subdriveARpm">Speed</label>
-						<input id="subdriveARpm" type="number" placeholder="Subdrive A RPM" step="0.01" />
-					</div>
-				</fieldset>
-			
+				<legend>Subdrive A</legend>
+				<div>
+					<label for="subdriveARadius">Radius</label>
+					<input id="subdriveARadius" type="number" placeholder="Subdrive A radius" />
+				</div>
+				<div>
+					<label for="subdriveARpm">Speed</label>
+					<input id="subdriveARpm" type="number" placeholder="Subdrive A RPM" step="0.01" />
+				</div>
+			</fieldset>
+
 			<fieldset>
 				<legend>Drive B</legend>
 				<div>
@@ -81,7 +85,7 @@
 					<input id="driveBY" type="number" />
 				</div>
 			</fieldset>
-			
+
 			<fieldset>
 				<legend>Subdrive B</legend>
 				<div>
@@ -93,7 +97,7 @@
 					<input id="subdriveBRpm" type="number" placeholder="Subdrive B RPM" step="0.01" />
 				</div>
 			</fieldset>
-			
+
 			<fieldset>
 				<legend>Arms length</legend>
 				<div>
@@ -105,11 +109,12 @@
 					<input id="arm2" type="number" />
 				</div>
 			</fieldset>
-			
-			<aside>
+
+			<!--<aside>
 				This is a pintograph simulator by <a href="http://dudak.pl">Michał Dudak</a>. Read more about it on <a href="https://github.com/doodack/pintograph">its GitHub page</a>.
-			</aside>
+			</aside>-->
 		</div>
+	</div>
 		
 		<div class="backdrop">
 			<canvas id="drawingArea" width="1500" height="950"></canvas>
