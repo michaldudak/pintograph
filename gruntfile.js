@@ -19,7 +19,7 @@ module.exports = function(grunt) {
 		},
 		uglify: {
 			options: {
-				banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %>\nMichał Dudak [http://dudak.pl]*/\n'
+				banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %>\nMichał Dudak [http://dudak.me]\nhttps://github.com/michaldudak/pintograph*/\n'
 			},
 			dist: {
 				files: {
