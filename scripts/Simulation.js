@@ -34,6 +34,7 @@ Simulation.prototype.step = function() {
 		drawBuffer.push({ x: this.pen.mountPoint.x, y: this.pen.mountPoint.y, style: this.pen.lineStyle });
 	} catch (err) {
 		console.warn(err);
+		throw err;
 	}
 };
 
@@ -41,16 +42,16 @@ Simulation.prototype.draw = function(context) {
 	if (drawBuffer.length <= 1) {
 		return;
 	}
-	
+
 	context.beginPath();
-	
+
 	context.lineTo(drawBuffer[0].x, drawBuffer[0].y);
 	for (var i = 1; i < drawBuffer.length; i++) {
 		var nextPoint = drawBuffer[i];
 		context.strokeStyle = nextPoint.style;
 		context.lineTo(nextPoint.x, nextPoint.y);
 	}
-	
+
 	context.stroke();
 
 	var lastPoint = drawBuffer[drawBuffer.length - 1];
@@ -81,7 +82,7 @@ Simulation.prototype.runOnce = function(drawingContext, toolsDrawingContext) {
 	for (var i = 0; i < this.stepsPerFrame; i++) {
 		this.step();
 	}
-	
+
 	this.draw(drawingContext);
 	if (this.renderTools) {
 		this.drawTools(toolsDrawingContext);
@@ -94,7 +95,7 @@ Simulation.prototype.run = function(drawingContext, toolsDrawingContext) {
 	running = true;
 	var self = this;
 	var frameCounter = 0;
-	
+
 	function runStep() {
 		if (self.fadeInterval) {
 			if (frameCounter++ >= self.fadeInterval) {
@@ -105,14 +106,14 @@ Simulation.prototype.run = function(drawingContext, toolsDrawingContext) {
 		} else {
 			frameCounter = 0;
 		}
-		
+
 		self.runOnce(drawingContext, toolsDrawingContext);
-		
+
 		if (running) {
 			requestAnimationFrame(runStep);
 		}
 	}
-	
+
 	runStep();
 };
 

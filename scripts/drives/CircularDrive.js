@@ -25,6 +25,7 @@ CircularDrive.prototype.step = function step(t) {
 CircularDrive.prototype.render = function(context) {
 	context.strokeStyle = "rgba(255,128,0,0.4)";
 	context.fillStyle = "rgba(255,255,255,0.4)";
+	context.lineWidth = 2;
 
 	context.beginPath();
 	context.arc(this.position.x, this.position.y, this.radius, 0, 2 * Math.PI);

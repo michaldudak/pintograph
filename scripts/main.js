@@ -1,41 +1,41 @@
 var driveA = new DoubleCircularDrive({
-	position: {x: 200, y: 800},
-	radius: 300,
-	startingAngle: 90,
-	rpm: -24,
+	position: {x: 140, y: 140},
+	radius: 80,
+	startingAngle: 0,
+	rpm: 16.04,
 	innerDrive: new CircularDrive({
-		position: {x: 500, y: 800},
-		radius: 150,
+		position: {x: 0, y: 0},
+		radius: 30,
 		startingAngle: 180,
-		rpm: 12.06
+		rpm: -24
 	})
 });
 
 var driveB = new DoubleCircularDrive({
-	position: {x: 700, y: 800},
-	radius: 250,
-	startingAngle: 0,
-	rpm: 24,
+	position: {x: 140, y: 450},
+	radius: 80,
+	startingAngle: -90,
+	rpm: -16,
 	innerDrive: new CircularDrive({
-		position: {x: 500, y: 800},
-		radius: 120,
+		position: {x: 0, y: 0},
+		radius: 30,
 		startingAngle: 180,
-		rpm: -48.06
+		rpm: 32.02
 	})
 });
 
-var arms = new SimpleArms(driveA, driveB, 700, 700);
+
+var arms = new CrossArms(driveA, driveB, 300, 300);
 arms.flip = false;
 
 //var pen = new SimplePen(arms, "rgba(255,255,255,0.55)");
 var pen = new RainbowPen(arms, 0.75, 0.001);
 
-var drawOverlay = false;
-
 var simulation = new Simulation(driveA, driveB, arms, pen);
 simulation.timeStep = 5;
-simulation.stepsPerFrame = 300;
+simulation.stepsPerFrame = 5;
 simulation.fadeColor = "rgba(0,0,0,0.1)";
-simulation.fadeInterval = 6;
+simulation.fadeInterval = 0;
+simulation.renderTools = true;
 
 setupUI(simulation);
