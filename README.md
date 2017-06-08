@@ -1,8 +1,8 @@
-#Pintograph simulator
+# Pintograph simulator
 
 This is a pintograph simulator inspired by [Alfred Hoehn's](https://www.youtube.com/user/alfredhoehn) machines.
 
-##Usage
+## Usage
 See it in action on https://michaldudak.github.io/pintograph.
 Currently the GUI allows to set several parameters of the drives - radius and rotation speed. More customization options are to come.
 To start, simply press the **Run** button. If you'd like to see the pintograph drives and arms, select the **Show overlay** checkbox.
@@ -12,8 +12,8 @@ However you may download a copy of the project and change the parameters in Java
 
 It looks the best in Firefox. Chrome renders more jagged lines.
 
-##Acknowledgements
+## Acknowledgements
 Kudos to [Fran McConville](http://www.fxmtech.com/harmonog.html) for a pintograph description and a spreadsheet with calculations. I made several changes to the original calculation methods but it was a huge help for me.
 
-##What's next
+## What's next
 The ultimate goal is to allow to build the complete pintograph using the GUI. Hopefully, I'll find some time to achieve this ;)
