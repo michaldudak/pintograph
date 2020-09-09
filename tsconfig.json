@@ -2,6 +2,10 @@
 	"include": ["lib"],
 	"compilerOptions": {
 		"target": "ES2015",
+		"module": "CommonJS",
+		"moduleResolution": "node",
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
 		"lib": [
 			"DOM",
 			"ES2015"
