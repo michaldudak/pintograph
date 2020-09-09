@@ -1,25 +1,30 @@
 {
-	"name": "pintograph",
-	"version": "0.1.0",
-	"description": "Pintograph simulator",
-	"author": {
-		"name": "Michał Dudak",
-		"email": "michal@dudak.me"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/doodack/pintograph.git"
-	},
-	"scripts": {
-    "build:dev": "webpack -d",
-    "build:prod": "webpack --mode=production",
-    "build": "webpack -d && webpack --mode=production"
-	},
-	"private": true,
-	"devDependencies": {
-		"ts-loader": "^8.0.3",
-		"typescript": "^4.0.2",
-		"webpack": "^4.44.1",
-		"webpack-cli": "^3.3.12"
-	}
+  "name": "pintograph",
+  "version": "0.1.0",
+  "description": "Pintograph simulator",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "author": {
+    "name": "Michał Dudak",
+    "email": "michal@dudak.me"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/michaldudak/pintograph.git"
+  },
+  "scripts": {
+    "watch": "webpack --watch -d",
+    "build": "webpack --mode=production"
+  },
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-pkg-json-webpack-plugin": "0.0.39",
+    "ts-loader": "^8.0.3",
+    "typescript": "^4.0.2",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  }
 }

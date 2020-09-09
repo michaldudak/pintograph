@@ -1,8 +1,13 @@
 {
-	"include": ["./scripts"],
+	"include": ["lib"],
 	"compilerOptions": {
-		"allowJs": true,
 		"target": "ES2015",
-		"outDir": "./dist"
+		"lib": [
+			"DOM",
+			"ES2015"
+		],
+		"outDir": "./dist",
+		"declaration": true,
+		"declarationDir": "./dist"
 	}
 }

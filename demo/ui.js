@@ -1,14 +1,11 @@
-import { Simulation } from "./Simulation";
-import { DoubleCircularDrive } from "./drives/DoubleCircularDrive";
-
-export function setupUI(simulation : Simulation) {
-	var drawingArea = document.getElementById("drawingArea") as HTMLCanvasElement;
+function setupUI(simulation) {
+	var drawingArea = document.getElementById("drawingArea");
 	var drawingContext = drawingArea.getContext("2d");
 
-	var overlayCanvas = document.getElementById("overlay") as HTMLCanvasElement;
+	var overlayCanvas = document.getElementById("overlay");
 	var overlayContext = overlayCanvas.getContext("2d");
 
-	function addListener(id : string, event : string, listener : (e : Event) => void) {
+	function addListener(id, event, listener) {
 		document.getElementById(id).addEventListener(event, listener);
 	}
 
@@ -29,8 +26,8 @@ export function setupUI(simulation : Simulation) {
 	});
 
 	addListener("drawOverlay", "change", function(e) {
-		simulation.renderTools = (e.target as HTMLInputElement).checked;
-		if (!(e.target as HTMLInputElement).checked) {
+		simulation.renderTools = e.target.checked;
+		if (!e.target.checked) {
 			overlayContext.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
 		} else {
 			simulation.drawTools(overlayContext);
@@ -38,7 +35,7 @@ export function setupUI(simulation : Simulation) {
 	});
 
 	addListener("fade", "change", function(e) {
-		simulation.fadeInterval = (e.target as HTMLInputElement).checked ? 6 : 0;
+		simulation.fadeInterval = e.target.checked ? 6 : 0;
 	});
 
 	addListener("settings", "click", function() {
@@ -46,8 +43,8 @@ export function setupUI(simulation : Simulation) {
 		controlsPanel.classList.toggle("expanded");
 	});
 
-	(document.getElementById("drawOverlay") as HTMLInputElement).checked = simulation.renderTools;
-	(document.getElementById("fade") as HTMLInputElement).checked = !!simulation.fadeInterval;
+	document.getElementById("drawOverlay").checked = simulation.renderTools;
+	document.getElementById("fade").checked = !!simulation.fadeInterval;
 
 	function resizeCanvas() {
 		var img = drawingContext.getImageData(0, 0, drawingArea.width, drawingArea.height);
@@ -59,7 +56,7 @@ export function setupUI(simulation : Simulation) {
 		overlayCanvas.height = window.innerHeight;
 	}
 
-	var resizeDelay : number | null = null;
+	var resizeDelay = null;
 
 	window.addEventListener("resize", function() {
 		if (resizeDelay) {
@@ -71,10 +68,10 @@ export function setupUI(simulation : Simulation) {
 
 	resizeCanvas();
 
-	function bindNumberProperty(controlId : string, object : object, propertyName : string) {
-		var control = document.getElementById(controlId) as HTMLInputElement;
+	function bindNumberProperty(controlId, object, propertyName) {
+		var control = document.getElementById(controlId);
 		control.addEventListener("input", function(e) {
-			object[propertyName] = +(e.target as HTMLInputElement).value || 0;
+			object[propertyName] = +e.target.value || 0;
 		});
 
 		control.value = object[propertyName];
@@ -85,16 +82,16 @@ export function setupUI(simulation : Simulation) {
 	bindNumberProperty("driveAX", simulation.driveA.position, "x");
 	bindNumberProperty("driveAY", simulation.driveA.position, "y");
 
-	bindNumberProperty("subdriveARadius", (simulation.driveA as DoubleCircularDrive).innerDrive, "radius");
-	bindNumberProperty("subdriveARpm", (simulation.driveA as DoubleCircularDrive).innerDrive, "rpm");
+	bindNumberProperty("subdriveARadius", simulation.driveA.innerDrive, "radius");
+	bindNumberProperty("subdriveARpm", simulation.driveA.innerDrive, "rpm");
 
 	bindNumberProperty("driveBRadius", simulation.driveB, "radius");
 	bindNumberProperty("driveBRpm", simulation.driveB, "rpm");
 	bindNumberProperty("driveBX", simulation.driveB.position, "x");
 	bindNumberProperty("driveBY", simulation.driveB.position, "y");
 
-	bindNumberProperty("subdriveBRadius", (simulation.driveB as DoubleCircularDrive).innerDrive, "radius");
-	bindNumberProperty("subdriveBRpm", (simulation.driveB as DoubleCircularDrive).innerDrive, "rpm");
+	bindNumberProperty("subdriveBRadius", simulation.driveB.innerDrive, "radius");
+	bindNumberProperty("subdriveBRpm", simulation.driveB.innerDrive, "rpm");
 
 	bindNumberProperty("stepsPerFrame", simulation, "stepsPerFrame");
 	bindNumberProperty("timeStep", simulation, "timeStep");
