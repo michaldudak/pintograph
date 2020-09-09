@@ -13,17 +13,16 @@ export class CircularDrive implements Drive {
 
 	public position : Vector2 = { x: 0, y : 0 }
 	public currentAngle : number;
-	public mountPoint : Vector2;
+	public mountPoint : Vector2 = { x: 0, y: 0 };
 	public radius : number;
-	private previousT : number;
+	private previousT : number = 0;
 	private rpm : number;
 
 	constructor(props : CircularDriveProps) {
-		for (var prop in props) {
-			if (props.hasOwnProperty(prop)) {
-				this[prop] = props[prop];
-			}
-		}
+		this.currentAngle = props.currentAngle;
+		this.position = props.position;
+		this.radius = props.radius;
+		this.rpm = props.rpm;
 
 		this.step(0);
 	};

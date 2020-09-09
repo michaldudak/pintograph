@@ -36,6 +36,10 @@ export class Simulation {
 			this.arms.step(t);
 			this.pen.step(t);
 
+			if (!this.pen.mountPoint) {
+				return;
+			}
+
 			this.drawBuffer.push({ x: this.pen.mountPoint.x, y: this.pen.mountPoint.y, style: this.pen.lineStyle });
 		} catch (err) {
 			console.warn(err);

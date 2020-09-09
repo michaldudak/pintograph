@@ -5,8 +5,8 @@ import { Vector2 } from "../Vectors";
 
 export class SimpleArms implements Arms {
 
-	public mountPoint : Vector2;
-	public flip : boolean;
+	public mountPoint : Vector2  = { x: 0, y: 0 };;
+	public flip : boolean = false;
 
 	constructor(private driveA : Drive, private driveB : Drive, private lengthA : number, private lengthB : number) { }
 

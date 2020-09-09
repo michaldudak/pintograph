@@ -15,20 +15,21 @@ export class DoubleCircularDrive implements Drive {
 
 	public currentAngle : number;
 	public position : Vector2;
-	public mountPoint : Vector2;
+	public mountPoint : Vector2 = { x: 0, y: 0 };
 	public radius : number;
 	public innerDrive : Drive;
 
-	private previousT : number;
+	private previousT : number = 0;
 	private rpm : number;
 	private rotateInnerDrive : boolean = true;
 
 	constructor(props : DoubleCircularDriveProps) {
-		for (var prop in props) {
-			if (props.hasOwnProperty(prop)) {
-				this[prop] = props[prop];
-			}
-		}
+		this.currentAngle = props.currentAngle;
+		this.position = props.position;
+		this.radius = props.radius;
+		this.innerDrive = props.innerDrive;
+		this.rpm = props.rpm;
+		this.rotateInnerDrive = props.rotateInnerDrive ?? true;
 
 		this.step(0);
 	};

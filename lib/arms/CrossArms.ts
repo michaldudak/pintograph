@@ -26,10 +26,10 @@ function getExtensionEndPoint(startPoint : Vector2, middlePoint : Vector2, exten
 
 export class CrossArms implements Arms {
 
-	public mountPoint : Vector2;
-	public flip : boolean;
-	private extensionAEnd : Vector2;
-	private extensionBEnd : Vector2;
+	public mountPoint : Vector2 = { x: 0, y: 0 };
+	public flip : boolean = false;
+	private extensionAEnd : Vector2  = { x: 0, y: 0 };;
+	private extensionBEnd : Vector2  = { x: 0, y: 0 };;
 
 	constructor(private driveA : Drive, private driveB : Drive, private lengthA : number, private lengthB : number) {}
 
