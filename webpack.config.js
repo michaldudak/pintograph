@@ -1,6 +1,8 @@
 const path = require('path');
 const CopyPkgJsonPlugin = require('copy-pkg-json-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+
 
 module.exports = {
 	entry: './lib/index.ts',
@@ -33,6 +35,9 @@ module.exports = {
 				main: 'index.js',
 				types: 'index.d.ts'
 			}
+		}),
+		new CopyPlugin({
+			patterns: ['*.md'],
 		})
 	]
 }
