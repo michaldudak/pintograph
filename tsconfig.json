@@ -1,0 +1,8 @@
+{
+	"include": ["./scripts"],
+	"compilerOptions": {
+		"allowJs": true,
+		"target": "ES2015",
+		"outDir": "./dist"
+	}
+}

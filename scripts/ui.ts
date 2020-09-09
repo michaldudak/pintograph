@@ -1,11 +1,14 @@
-function setupUI(simulation) {
-	var drawingArea = document.getElementById("drawingArea");
+import { Simulation } from "./Simulation";
+import { DoubleCircularDrive } from "./drives/DoubleCircularDrive";
+
+export function setupUI(simulation : Simulation) {
+	var drawingArea = document.getElementById("drawingArea") as HTMLCanvasElement;
 	var drawingContext = drawingArea.getContext("2d");
 
-	var overlayCanvas = document.getElementById("overlay");
+	var overlayCanvas = document.getElementById("overlay") as HTMLCanvasElement;
 	var overlayContext = overlayCanvas.getContext("2d");
 
-	function addListener(id, event, listener) {
+	function addListener(id : string, event : string, listener : (e : Event) => void) {
 		document.getElementById(id).addEventListener(event, listener);
 	}
 
@@ -26,16 +29,16 @@ function setupUI(simulation) {
 	});
 
 	addListener("drawOverlay", "change", function(e) {
-		simulation.renderTools = e.target.checked;
-		if (!e.target.checked) {
+		simulation.renderTools = (e.target as HTMLInputElement).checked;
+		if (!(e.target as HTMLInputElement).checked) {
 			overlayContext.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
 		} else {
 			simulation.drawTools(overlayContext);
 		}
 	});
-	
+
 	addListener("fade", "change", function(e) {
-		simulation.fadeInterval = e.target.checked ? 6 : 0;
+		simulation.fadeInterval = (e.target as HTMLInputElement).checked ? 6 : 0;
 	});
 
 	addListener("settings", "click", function() {
@@ -43,8 +46,8 @@ function setupUI(simulation) {
 		controlsPanel.classList.toggle("expanded");
 	});
 
-	document.getElementById("drawOverlay").checked = simulation.renderTools;
-	document.getElementById("fade").checked = !!simulation.fadeInterval;
+	(document.getElementById("drawOverlay") as HTMLInputElement).checked = simulation.renderTools;
+	(document.getElementById("fade") as HTMLInputElement).checked = !!simulation.fadeInterval;
 
 	function resizeCanvas() {
 		var img = drawingContext.getImageData(0, 0, drawingArea.width, drawingArea.height);
@@ -56,7 +59,7 @@ function setupUI(simulation) {
 		overlayCanvas.height = window.innerHeight;
 	}
 
-	var resizeDelay;
+	var resizeDelay : number | null = null;
 
 	window.addEventListener("resize", function() {
 		if (resizeDelay) {
@@ -68,10 +71,10 @@ function setupUI(simulation) {
 
 	resizeCanvas();
 
-	function bindNumberProperty(controlId, object, propertyName) {
-		var control = document.getElementById(controlId);
+	function bindNumberProperty(controlId : string, object : object, propertyName : string) {
+		var control = document.getElementById(controlId) as HTMLInputElement;
 		control.addEventListener("input", function(e) {
-			object[propertyName] = +e.target.value || 0;
+			object[propertyName] = +(e.target as HTMLInputElement).value || 0;
 		});
 
 		control.value = object[propertyName];
@@ -81,21 +84,21 @@ function setupUI(simulation) {
 	bindNumberProperty("driveARpm", simulation.driveA, "rpm");
 	bindNumberProperty("driveAX", simulation.driveA.position, "x");
 	bindNumberProperty("driveAY", simulation.driveA.position, "y");
-	
-	bindNumberProperty("subdriveARadius", simulation.driveA.innerDrive, "radius");
-	bindNumberProperty("subdriveARpm", simulation.driveA.innerDrive, "rpm");
+
+	bindNumberProperty("subdriveARadius", (simulation.driveA as DoubleCircularDrive).innerDrive, "radius");
+	bindNumberProperty("subdriveARpm", (simulation.driveA as DoubleCircularDrive).innerDrive, "rpm");
 
 	bindNumberProperty("driveBRadius", simulation.driveB, "radius");
 	bindNumberProperty("driveBRpm", simulation.driveB, "rpm");
 	bindNumberProperty("driveBX", simulation.driveB.position, "x");
 	bindNumberProperty("driveBY", simulation.driveB.position, "y");
-	
-	bindNumberProperty("subdriveBRadius", simulation.driveB.innerDrive, "radius");
-	bindNumberProperty("subdriveBRpm", simulation.driveB.innerDrive, "rpm");
+
+	bindNumberProperty("subdriveBRadius", (simulation.driveB as DoubleCircularDrive).innerDrive, "radius");
+	bindNumberProperty("subdriveBRpm", (simulation.driveB as DoubleCircularDrive).innerDrive, "rpm");
 
 	bindNumberProperty("stepsPerFrame", simulation, "stepsPerFrame");
 	bindNumberProperty("timeStep", simulation, "timeStep");
-	
+
 	bindNumberProperty("arm1", simulation.arms, "lengthA");
 	bindNumberProperty("arm2", simulation.arms, "lengthB");
 }

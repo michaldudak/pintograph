@@ -1,19 +1,25 @@
 {
-	"name": "Pintograph",
+	"name": "pintograph",
 	"version": "0.1.0",
 	"description": "Pintograph simulator",
 	"author": {
 		"name": "Michał Dudak",
-		"email": "michal@dudak.pl"
+		"email": "michal@dudak.me"
 	},
-	"repository" : {
+	"repository": {
 		"type": "git",
 		"url": "https://github.com/doodack/pintograph.git"
 	},
+	"scripts": {
+    "build:dev": "webpack -d",
+    "build:prod": "webpack --mode=production",
+    "build": "webpack -d && webpack --mode=production"
+	},
 	"private": true,
 	"devDependencies": {
-		"grunt": "~0.4.5",
-		"grunt-contrib-uglify": "~0.6.0",
-		"grunt-contrib-concat": "~0.5.0"
+		"ts-loader": "^8.0.3",
+		"typescript": "^4.0.2",
+		"webpack": "^4.44.1",
+		"webpack-cli": "^3.3.12"
 	}
 }
