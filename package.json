@@ -8,10 +8,12 @@
     "name": "Michał Dudak",
     "email": "michal@dudak.me"
   },
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/michaldudak/pintograph.git"
   },
+  "homepage": "https://github.com/michaldudak/pintograph#readme",
   "scripts": {
     "watch": "webpack --watch -d",
     "build": "webpack --mode=production"
