@@ -1,41 +1,36 @@
-var driveA = new Pintograph.DoubleCircularDrive({
-	position: {x: 140, y: 140},
-	radius: 80,
-	currentAngle: 0,
-	rpm: 16.04,
-	innerDrive: new Pintograph.CircularDrive({
-		position: {x: 0, y: 0},
-		radius: 30,
-		currentAngle: 180,
-		rpm: -24
-	})
-});
+function createCanvas(className) {
+	let canvas = document.createElement('canvas');
+	canvas.width = 800;
+	canvas.height = 600;
+	canvas.className = className;
 
-var driveB = new Pintograph.DoubleCircularDrive({
-	position: {x: 140, y: 450},
-	radius: 80,
-	currentAngle: -90,
-	rpm: -16,
-	innerDrive: new Pintograph.CircularDrive({
-		position: {x: 0, y: 0},
-		radius: 30,
-		currentAngle: 180,
-		rpm: 32.02
-	})
-});
+	return canvas;
+}
 
+function setupDemo(container, sceneFactory) {
+	let artCanvas = createCanvas('drawingArea');
+	container.appendChild(artCanvas);
+	let artContext = artCanvas.getContext('2d');
 
-var arms = new Pintograph.CrossArms(driveA, driveB, 300, 300);
-arms.flip = false;
+	let contraptionsCanvas = createCanvas('overlay');
+	container.appendChild(contraptionsCanvas);
+	let contraptionsContext = contraptionsCanvas.getContext('2d');
 
-//var pen = new Pintograph.SimplePen(arms, "rgba(255,255,255,0.55)");
-var pen = new Pintograph.RainbowPen(arms, 0.75, 0.001);
+	let scene = sceneFactory(artContext, contraptionsContext);
 
-var simulation = new Pintograph.Simulation(driveA, driveB, arms, pen);
-simulation.timeStep = 5;
-simulation.stepsPerFrame = 5;
-simulation.fadeColor = "rgba(0,0,0,0.1)";
-simulation.fadeInterval = 0;
-simulation.renderTools = true;
+	let startButton = document.createElement('button');
+	startButton.innerText = 'Start';
+	startButton.addEventListener('click', () => scene.run());
 
-setupUI(simulation);
+	let stopButton = document.createElement('button');
+	stopButton.innerText = 'Stop';
+	stopButton.addEventListener('click', () => scene.stop());
+
+	let buttonsContainer = document.createElement('div');
+	buttonsContainer.className = 'controls';
+
+	buttonsContainer.appendChild(startButton);
+	buttonsContainer.appendChild(stopButton);
+
+	container.appendChild(buttonsContainer);
+}

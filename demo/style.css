@@ -1,142 +1,44 @@
 body {
-	background: #000;
-	font-family: "Segoe UI";
-	color: #eee;
+	background: #FFF;
+	font-family: "Segoe UI", "San Francisco", Helvetica, sans-serif;
+	color: #333;
 	font-size: 14px;
 }
 
 .controls {
-	position: fixed;
-	height: 260px;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	border-top: 1px #333 solid;
-	padding: 10px;
-	box-sizing: border-box;
-	z-index: 1;
-	background: rgb(220,220,220);
-	transform: translateY(260px);
-	transition: transform 300ms;
-}
-
-.controls.expanded {
-	transform: translateY(0);
-}
-
-.controls.expanded #settings {
-	background: rgb(220,220,220);
-	color: #222;
-}
-
-.controls .basic {
 	position: absolute;
-	height: 40px;
-	top: -40px;
 	left: 0;
-	width: auto;
-}
-
-.controls button {
-	display: inline-block;
-	box-sizing: border-box;
-	border: none;
-	background: rgba(255,255,255,0.2);
-	color: #eee;
-	height: 40px;
-	padding: 0 10px;
-}
-
-.controls button:hover {
-	background: #1ff5c2;
-	cursor: pointer;
-	color: #222;
-}
-
-.controls .advanced {
-	min-width: 980px;
-}
-
-.controls fieldset {
-	box-sizing: border-box;
-	border: none;
-	width: 16.6666%;
-	min-width: 160px;
-	float: left;
-	margin: 20px 0;
-	padding: 10px;
-	font-size: 0;
-}
-
-.controls fieldset * {
-	font-size: 14px;
-}
-
-.controls fieldset div {
-	display: inline-block;
-	width: 50%;
-	padding: 0 4px;
-	box-sizing: border-box;
-}
-
-.controls legend {
-	font-size: 16px;
-	color: #0a4033;
-}
-
-.controls label {
-	color: #000;
-	font-weight: bold;
-	font-size: 12px;
-}
-
-.controls input[type=number], 
-.controls input[type=text] {
-	font-family: "Segoe UI", "Arial", sans-serif;
-	box-sizing: border-box;
-	width: 100%;
-	border: none;
-	border-bottom: 2px solid #999;
-	background: transparent;
-	color: #000;
-	padding: 4px;
-}
-
-.controls input[type=number]:hover, 
-.controls input[type=text]:hover {
-	background: rgba(255,255,255,0.15);
-}
-
-.controls aside {
-	margin-top: 40px;
-}
-
-.controls a {
-	color: #1ff5c2;
-	text-decoration: none;
-}
-
-.backdrop {
-	background: #111;
-	position: fixed;
 	top: 0;
-	left: 0;
-	right: 260px;
-	bottom: 0;
-	z-index: 0;
+
+	padding: 10px;
+	box-sizing: border-box;
+	z-index: 5;
 }
 
-.backdrop canvas {
+.example > div {
+	display: flex;
+}
+
+.preview {
+	position: relative;
+	flex: 0 0 800px;
+	min-height: 600px;
+}
+
+.preview canvas {
 	display: block;
 	position: absolute;
-
+	top: 0;
+	left: 0;
+	width: 800px;
+	height: 600px;
 }
 
-#drawingArea {
-	background: #000;
-	z-index: 0;
-}
-
-#overlay {
-	z-index: 1;
+.code {
+	display: block;
+	white-space: pre;
+	font-family: monospace;
+	flex: 1 1 auto;
+	tab-size: 2ch;
+	margin-left: -10ch;
 }
