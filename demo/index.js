@@ -8,12 +8,16 @@ function createCanvas(className) {
 }
 
 function setupDemo(container, sceneFactory) {
+
+	let preview = container.querySelector('.preview');
+	let code = container.querySelector('.code');
+
 	let artCanvas = createCanvas('drawingArea');
-	container.appendChild(artCanvas);
+	preview.appendChild(artCanvas);
 	let artContext = artCanvas.getContext('2d');
 
 	let contraptionsCanvas = createCanvas('overlay');
-	container.appendChild(contraptionsCanvas);
+	preview.appendChild(contraptionsCanvas);
 	let contraptionsContext = contraptionsCanvas.getContext('2d');
 
 	let scene = sceneFactory(artContext, contraptionsContext);
@@ -32,5 +36,7 @@ function setupDemo(container, sceneFactory) {
 	buttonsContainer.appendChild(startButton);
 	buttonsContainer.appendChild(stopButton);
 
-	container.appendChild(buttonsContainer);
+	preview.appendChild(buttonsContainer);
+
+	code.innerHTML = code.innerHTML.replace(/\t\t\t\t\t/gm, '').trim();
 }

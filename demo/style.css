@@ -1,5 +1,10 @@
+body, html, h1, h2 {
+	margin: 0;
+	padding: 0;
+}
+
 body {
-	background: #FFF;
+	background: #f0f0f0;
 	font-family: "Segoe UI", "San Francisco", Helvetica, sans-serif;
 	color: #333;
 	font-size: 14px;
@@ -15,8 +20,55 @@ body {
 	z-index: 5;
 }
 
+h1 {
+	font-size: 2rem;
+	padding: 2em 20px 20px 20px;
+	font-weight: normal;
+	background: linear-gradient(90deg, #4E42E0, #22368F);
+	color: #fff;
+
+}
+
+h2 {
+	font-size: 2rem;
+	font-weight: normal;
+	padding: 20px;
+}
+
+.controls button {
+	border: none;
+	background: #f0f0f0;
+	font-family: inherit;
+	font-weight: bold;
+	color: #888;
+	text-transform: uppercase;
+	padding: 10px;
+	box-shadow: -2px -2px 5px #fff, 2px 2px 5px #e0e0e0;
+	margin: 0 10px;
+	border-radius: 6px;
+	transition: all 300ms;
+}
+
+.controls button:hover {
+	box-shadow: -4px -4px 8px #fff, 4px 4px 8px #e0e0e0;
+	background: #f5f5f5;
+	cursor: pointer;
+}
+
+.controls button:active,
+.controls button:focus {
+	outline: none;
+}
+
+.controls button:active {
+	transition: none;
+	background-color: #22368F;
+	color: #fff;
+}
+
 .example > div {
 	display: flex;
+	flex-wrap: wrap;
 }
 
 .preview {
@@ -32,6 +84,7 @@ body {
 	left: 0;
 	width: 800px;
 	height: 600px;
+	border-radius: 6px;
 }
 
 .code {
@@ -40,5 +93,10 @@ body {
 	font-family: monospace;
 	flex: 1 1 auto;
 	tab-size: 2ch;
-	margin-left: -10ch;
+	background: linear-gradient(-40deg, #222, #444);
+	color: #fff;
+	border-radius: 20px 0 0 20px;
+	box-shadow: -4px -4px 8px #fff, 4px 4px 8px #d0d0d0;
+	padding: 20px;
+	margin-left: 20px;
 }
