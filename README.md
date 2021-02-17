@@ -11,3 +11,5 @@ I am working on an online editor that will allow creating drawings without writi
 ## Acknowledgements
 
 Kudos to [Fran McConville](http://www.fxmtech.com/harmonog.html) for a pintograph description and a spreadsheet with calculations. I made several changes to the original calculation methods but it was a huge help for me.
+
+The multi-wheel drawing machine was inspired by [Robert Balke Zeichenmaschinen](https://www.facebook.com/balke.zeichenmaschinen).

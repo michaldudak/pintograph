@@ -184,6 +184,99 @@
 			</div>
 		</section>
 
+		<section class="example" id="example-5">
+			<h2>Rotary pintograph</h2>
+			<div>
+				<div class="preview"></div>
+				<script class="code">
+					function example5(scene) {
+						let center = new Pintograph.StaticMountPoint({ x: 250, y: 250 });
+						let baseWheel1 = new Pintograph.Wheel(center, 200, 0, 0.201);
+						let baseWheel2 = new Pintograph.Wheel(center, 200, Math.PI / 6, 0.201);
+						let wheel1 = new Pintograph.Wheel(baseWheel1.mountPoint, 20, -Math.PI, 6);
+						let wheel2 = new Pintograph.Wheel(baseWheel2.mountPoint, 40, 0, 2);
+
+						let arm = new Pintograph.VArm({
+							mountedAt1: wheel1.mountPoint,
+							mountedAt2: wheel2.mountPoint,
+							length1: 80,
+							length2: 100,
+							flip: true
+						});
+
+						let pen = new Pintograph.Pen(arm.mountPoint, '#000');
+
+						scene.objects.push(center);
+						scene.objects.push(baseWheel1);
+						scene.objects.push(baseWheel2);
+						scene.objects.push(wheel1);
+						scene.objects.push(wheel2);
+						scene.objects.push(arm);
+						scene.pens.push(pen);
+					}
+				</script>
+				<script>
+					setupDemo(document.querySelector('#example-5'), (ctx, toolCtx) => {
+						let scene = new Pintograph.Scene(ctx, toolCtx);
+						example5(scene);
+						return scene;
+					});
+				</script>
+			</div>
+		</section>
+
+		<section class="example" id="example-6">
+			<h2>Multi-wheel pintograph</h2>
+			<div>
+				<div class="preview"></div>
+				<script class="code">
+					function example6(scene) {
+						let m1 = new Pintograph.StaticMountPoint({ x: 25, y: 250 });
+						let m2 = new Pintograph.StaticMountPoint({ x: 200, y: 350 });
+						let m3 = new Pintograph.StaticMountPoint({ x: 400, y: 300 });
+
+						let w1 = new Pintograph.Wheel(m1, 20, 0, 0.2);
+						let w2 = new Pintograph.Wheel(m2, 30, Math.PI / 6, 0.002);
+						let w3 = new Pintograph.Wheel(m3, 20, Math.PI / 6, -0.3);
+
+						let a12 = new Pintograph.XArm({
+							mountedAt1: w1.mountPoint,
+							mountedAt2: w2.mountPoint,
+							length1: 150,
+							extensionLength1: 60,
+							length2: 110,
+							extensionLength2: 0,
+							flip: false
+						});
+
+						let a123 = new Pintograph.XArm({
+							mountedAt1: a12.mountPoint1,
+							mountedAt2: w3.mountPoint,
+							length1: 80,
+							extensionLength1: 0,
+							length2: 150,
+							extensionLength2: 60,
+							flip: false
+						});
+
+						let pen = new Pintograph.Pen(a123.mountPoint2, '#000');
+
+						scene.objects.push(m1, m2, m3);
+						scene.objects.push(w1, w2, w3);
+						scene.objects.push(a12, a123);
+						scene.pens.push(pen);
+					}
+				</script>
+				<script>
+					setupDemo(document.querySelector('#example-6'), (ctx, toolCtx) => {
+						let scene = new Pintograph.Scene(ctx, toolCtx);
+						example6(scene);
+						return scene;
+					});
+				</script>
+			</div>
+		</section>
+
 		<!--
 
 		<script>
