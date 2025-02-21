@@ -1,4 +1,4 @@
-import * as Pintograph from '../../../lib/index.ts';
+import * as Pintograph from '../../../src/index.ts';
 
 export default function multiWheelPintograph(scene: Pintograph.Scene) {
 	let m1 = new Pintograph.StaticMountPoint({ x: 25, y: 250 });

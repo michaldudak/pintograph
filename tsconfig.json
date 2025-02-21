@@ -17,9 +17,8 @@
 
 		"strict": true,
 		"noUnusedLocals": true,
-		"noUnusedParameters": true,
 		"noFallthroughCasesInSwitch": true,
 		"noUncheckedSideEffectImports": true
 	},
-	"include": ["lib"]
+	"include": ["src"]
 }

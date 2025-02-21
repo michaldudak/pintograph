@@ -1,4 +1,4 @@
-import * as Pintograph from '../../../lib/index.ts';
+import * as Pintograph from '../../../src/index.ts';
 
 export default function rotaryPintograph(scene: Pintograph.Scene) {
 	let center = new Pintograph.StaticMountPoint({ x: 250, y: 250 });

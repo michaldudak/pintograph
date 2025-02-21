@@ -1,4 +1,4 @@
-import * as Pintograph from '../../../lib/index.ts';
+import * as Pintograph from '../../../src/index.ts';
 
 export default function lissajous(scene: Pintograph.Scene) {
 	let mountPoint = new Pintograph.StaticMountPoint({ x: 400, y: 300 });

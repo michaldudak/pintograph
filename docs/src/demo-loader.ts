@@ -1,4 +1,4 @@
-import * as Pintograph from '../../lib/index.ts';
+import * as Pintograph from '../../src/index.ts';
 
 export async function loadDemo(name: string, title: string, rootContainer: Element | null) {
 	if (!rootContainer) {
