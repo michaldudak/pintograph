@@ -4,7 +4,7 @@ This is a pintograph simulator inspired by [Alfred Hoehn's](https://www.youtube.
 
 ## Usage
 
-See it in action on <https://michaldudak.github.io/pintograph/demo>. This page shows a couple of examples that can be a starting point for your own setups.
+See it in action on <https://michaldudak.github.io/pintograph>. This page shows a couple of examples that can be a starting point for your own setups.
 
 I am working on an online editor that will allow creating drawings without writing a single line of code. However, it is not ready to be shared yet.
 
