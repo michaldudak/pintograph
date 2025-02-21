@@ -17,7 +17,9 @@
   "homepage": "https://github.com/michaldudak/pintograph#readme",
   "scripts": {
     "build": "rimraf ./dist && tsc -p tsconfig.json",
-    "dev": "vite vite-app"
+    "build:docs": "vite build demo",
+    "preview": "vite preview demo",
+    "dev": "vite demo"
   },
   "files": [
     "dist"
