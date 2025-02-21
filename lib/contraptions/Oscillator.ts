@@ -1,8 +1,8 @@
-import { MountPoint } from "./MountPoint";
-import { SceneObject } from "./SceneObject";
-import { Matrix3, identity, fromRotation, fromTranslation, multiply, transform } from '../math/Matrices';
-import { drawMountPoint } from "./rendering/drawMountPoint";
-import { EasingFunction, easingFunctions } from "./EasingFunction";
+import { MountPoint } from "./MountPoint.js";
+import { SceneObject } from "./SceneObject.js";
+import { Matrix3, identity, fromRotation, fromTranslation, multiply, transform } from '../math/Matrices.js';
+import { drawMountPoint } from "./rendering/drawMountPoint.js";
+import { EasingFunction, easingFunctions } from "./EasingFunction.js";
 
 export class Oscillator implements SceneObject {
 

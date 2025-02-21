@@ -4,6 +4,7 @@
   "description": "Pintograph simulator",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "type": "module",
   "author": {
     "name": "Michał Dudak",
     "email": "michal@dudak.me"
@@ -15,19 +16,14 @@
   },
   "homepage": "https://github.com/michaldudak/pintograph#readme",
   "scripts": {
-    "watch": "webpack --watch -d",
-    "build": "webpack --mode=production"
+    "build": "rimraf ./dist && tsc -p tsconfig.json"
   },
   "files": [
     "dist"
   ],
   "devDependencies": {
-    "clean-webpack-plugin": "^3.0.0",
-    "copy-pkg-json-webpack-plugin": "0.0.39",
-    "copy-webpack-plugin": "^6.1.0",
-    "ts-loader": "^8.0.3",
-    "typescript": "^4.0.2",
-    "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12"
-  }
+    "rimraf": "^6.0.1",
+    "typescript": "^5.7.3"
+  },
+  "packageManager": "pnpm@9.15.4+sha512.b2dc20e2fc72b3e18848459b37359a32064663e5627a51e4c74b2c29dd8e8e0491483c3abb40789cfd578bf362fb6ba8261b05f0387d76792ed6e23ea3b1b6a0"
 }

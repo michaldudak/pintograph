@@ -1,2 +1,2 @@
-export * from './contraptions';
-export * from './Scene';
+export * from './contraptions/index.js';
+export * from './Scene.js';

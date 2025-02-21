@@ -1,5 +1,4 @@
-import { Vector2 } from "../../math/Vectors";
-import { Matrix3, transform } from "../../math/Matrices";
+import { Vector2, Matrix3, transform } from "../../math/index.js";
 
 export function drawMountPoint(context: CanvasRenderingContext2D, transformation: Matrix3) {
 	let mountPointDisplayCoords: Vector2[] = [

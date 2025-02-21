@@ -1,9 +1,7 @@
-import { SceneObject } from "./SceneObject";
-import { MountPoint } from "./MountPoint";
-import { Vector2, subtractVectors, distance, getAngle } from "../math/Vectors";
-import { transform, identity, Matrix3, fromRotation, fromTranslation, multiply } from "../math/Matrices";
-import { EPSILON, circleCircleIntersection } from "../math/MathUtils";
-import { drawMountPoint } from "./rendering/drawMountPoint";
+import { Vector2, Matrix3, fromTranslation, identity, multiply, transform, distance, EPSILON, circleCircleIntersection, fromRotation, getAngle, subtractVectors } from "../math/index.js";
+import { MountPoint } from "./MountPoint.js";
+import { SceneObject } from "./SceneObject.js";
+import { drawMountPoint } from "./rendering/drawMountPoint.js";
 
 export interface VArmParameters {
 	mountedAt1 : MountPoint;

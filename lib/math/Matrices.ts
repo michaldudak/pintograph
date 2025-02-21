@@ -1,4 +1,4 @@
-import { Vector2 } from "./Vectors";
+import { Vector2 } from "./Vectors.js";
 
 export type Matrix3 = Float32Array;
 

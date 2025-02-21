@@ -1,4 +1,4 @@
-import { Vector2, distance } from './Vectors';
+import { Vector2, distance } from './Vectors.js';
 
 export const EPSILON = 0.0001;
 export const PI_INV = 1 / Math.PI;

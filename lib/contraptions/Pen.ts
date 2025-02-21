@@ -1,7 +1,6 @@
-import { MountPoint } from './MountPoint';
-import { transform } from '../math/Matrices';
-import { SceneObject } from './SceneObject';
-import { Vector2 } from '../math/Vectors';
+import { MountPoint } from './MountPoint.js';
+import { SceneObject } from './SceneObject.js';
+import { transform, Vector2 } from '../math/index.js';
 
 interface DrawBufferItem extends Vector2 {
 	color : string;

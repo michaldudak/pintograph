@@ -1,9 +1,7 @@
-import { SceneObject } from "./SceneObject";
-import { MountPoint } from "./MountPoint";
-import { Vector2, distance, subtractVectors, multiplyVector, normalizeVector, addVectors, getAngle } from "../math/Vectors";
-import { transform, identity, Matrix3, fromRotation, fromTranslation, multiply } from "../math/Matrices";
-import { EPSILON, circleCircleIntersection } from "../math/MathUtils";
-import { drawMountPoint } from "./rendering/drawMountPoint";
+import { SceneObject } from "./SceneObject.js";
+import { MountPoint } from "./MountPoint.js";
+import { drawMountPoint } from "./rendering/drawMountPoint.js";
+import { Vector2, distance, subtractVectors, multiplyVector, normalizeVector, addVectors, getAngle, transform, identity, Matrix3, fromRotation, fromTranslation, multiply, EPSILON, circleCircleIntersection } from "../math/index.js";
 
 export interface XArmParameters {
 	mountedAt1 : MountPoint;

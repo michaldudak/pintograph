@@ -1,7 +1,7 @@
-import { MountPoint } from "./MountPoint";
-import { SceneObject } from "./SceneObject";
-import { drawMountPoint } from "./rendering/drawMountPoint";
-import { Matrix3, identity, fromRotation, fromTranslation, multiply, transform } from "../math/Matrices";
+import { MountPoint } from "./MountPoint.js";
+import { SceneObject } from "./SceneObject.js";
+import { drawMountPoint } from "./rendering/drawMountPoint.js";
+import { Matrix3, identity, fromRotation, fromTranslation, multiply, transform } from "../math/Matrices.js";
 
 export class Wheel implements SceneObject {
 

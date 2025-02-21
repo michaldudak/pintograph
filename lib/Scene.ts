@@ -1,6 +1,4 @@
-import { SceneObject } from "./contraptions/SceneObject";
-import { Pen } from './contraptions';
-import { EvalSourceMapDevToolPlugin } from "webpack";
+import { Pen, SceneObject } from './contraptions/index.js';
 
 export class Scene {
 

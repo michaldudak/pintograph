@@ -1,8 +1,7 @@
-import { Vector2 } from "../math/Vectors";
-import { Matrix3, fromTranslation, identity, multiply } from "../math/Matrices";
-import { MountPoint } from "./MountPoint";
-import { SceneObject } from "./SceneObject";
-import { drawMountPoint } from "./rendering/drawMountPoint";
+import { Vector2, Matrix3, fromTranslation, identity, multiply } from "../math/index.js";
+import { MountPoint } from "./MountPoint.js";
+import { SceneObject } from "./SceneObject.js";
+import { drawMountPoint } from "./rendering/drawMountPoint.js";
 
 export class StaticMountPoint implements SceneObject, MountPoint {
 
