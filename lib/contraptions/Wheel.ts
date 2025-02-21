@@ -1,10 +1,16 @@
-import { MountPoint } from "./MountPoint.js";
-import { SceneObject } from "./SceneObject.js";
-import { drawMountPoint } from "./rendering/drawMountPoint.js";
-import { Matrix3, identity, fromRotation, fromTranslation, multiply, transform } from "../math/Matrices.js";
+import { MountPoint } from './MountPoint.js';
+import { SceneObject } from './SceneObject.js';
+import { drawMountPoint } from './rendering/drawMountPoint.js';
+import {
+	Matrix3,
+	identity,
+	fromRotation,
+	fromTranslation,
+	multiply,
+	transform,
+} from '../math/Matrices.js';
 
 export class Wheel implements SceneObject {
-
 	private localTransformation: Matrix3;
 	public readonly mountPoint: MountPoint;
 
@@ -13,7 +19,12 @@ export class Wheel implements SceneObject {
 	private rotationMatrix: Matrix3;
 	private translationMatrix: Matrix3;
 
-	constructor(private mountedAt: MountPoint, public radius: number, public startAngle: number, public speed: number) {
+	constructor(
+		private mountedAt: MountPoint,
+		public radius: number,
+		public startAngle: number,
+		public speed: number
+	) {
 		this.currentAngle = startAngle;
 		this.rotationMatrix = identity();
 		this.translationMatrix = identity();
@@ -26,7 +37,11 @@ export class Wheel implements SceneObject {
 		fromRotation(this.rotationMatrix, this.currentAngle);
 		fromTranslation(this.translationMatrix, this.radius, 0);
 		multiply(this.localTransformation, this.rotationMatrix, this.translationMatrix);
-		multiply(this.mountPoint.transformation, this.mountedAt.transformation, this.localTransformation);
+		multiply(
+			this.mountPoint.transformation,
+			this.mountedAt.transformation,
+			this.localTransformation
+		);
 	}
 
 	drawDebug(context: CanvasRenderingContext2D) {

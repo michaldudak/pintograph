@@ -14,7 +14,10 @@ export async function loadDemo(name: string, title: string, rootContainer: Eleme
 
 	const codePanel = document.createElement('pre');
 	codePanel.className = 'code';
-	const sourceCode = (await import(`./demos/${name}.ts?raw`)).default.replace('../../../lib/index.ts', 'pintograph');
+	const sourceCode = (await import(`./demos/${name}.ts?raw`)).default.replace(
+		'../../../lib/index.ts',
+		'pintograph'
+	);
 	codePanel.innerText = sourceCode;
 
 	const previewPanel = document.createElement('div');

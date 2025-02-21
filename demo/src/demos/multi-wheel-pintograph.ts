@@ -16,7 +16,7 @@ export default function multiWheelPintograph(scene: Pintograph.Scene) {
 		extensionLength1: 60,
 		length2: 110,
 		extensionLength2: 0,
-		flip: false
+		flip: false,
 	});
 
 	let a123 = new Pintograph.XArm({
@@ -26,7 +26,7 @@ export default function multiWheelPintograph(scene: Pintograph.Scene) {
 		extensionLength1: 0,
 		length2: 150,
 		extensionLength2: 60,
-		flip: false
+		flip: false,
 	});
 
 	let pen = new Pintograph.Pen(a123.mountPoint2, '#000');

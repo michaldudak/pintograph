@@ -3,16 +3,18 @@ import { SceneObject } from './SceneObject.js';
 import { transform, Vector2 } from '../math/index.js';
 
 interface DrawBufferItem extends Vector2 {
-	color : string;
+	color: string;
 }
 
 export class Pen implements SceneObject {
-
-	public color : ((elapsedTime : number) => string);
+	public color: (elapsedTime: number) => string;
 	private worldPosition: Vector2 = { x: 0, y: 0 };
 	private drawBuffer: DrawBufferItem[] = [];
 
-	constructor(private mountedAt: MountPoint, color : string | ((elapsedTime : number) => string)) {
+	constructor(
+		private mountedAt: MountPoint,
+		color: string | ((elapsedTime: number) => string)
+	) {
 		if (typeof color === 'string') {
 			this.color = () => color;
 		} else {
@@ -22,10 +24,13 @@ export class Pen implements SceneObject {
 
 	step(elapsedTime: number, deltaTime: number) {
 		transform(this.worldPosition, { x: 0, y: 0 }, this.mountedAt.transformation);
-		this.drawBuffer.push({ ...this.worldPosition, color: this.color(elapsedTime) });
-	};
+		this.drawBuffer.push({
+			...this.worldPosition,
+			color: this.color(elapsedTime),
+		});
+	}
 
-	drawDebug(context: CanvasRenderingContext2D) { };
+	drawDebug(context: CanvasRenderingContext2D) {}
 
 	draw(context: CanvasRenderingContext2D) {
 		if (this.drawBuffer.length > 1) {
@@ -39,7 +44,7 @@ export class Pen implements SceneObject {
 			context.strokeStyle = this.drawBuffer[0].color;
 			context.stroke();
 
-			this.drawBuffer = [ this.drawBuffer[this.drawBuffer.length - 1] ];
+			this.drawBuffer = [this.drawBuffer[this.drawBuffer.length - 1]];
 		}
 	}
 }

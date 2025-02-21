@@ -1,12 +1,12 @@
-import { Vector2 } from "./Vectors.js";
+import { Vector2 } from './Vectors.js';
 
 export type Matrix3 = Float32Array;
 
-export function identity() : Matrix3 {
+export function identity(): Matrix3 {
 	return new Float32Array([1, 0, 0, 0, 1, 0, 0, 0, 1]);
 }
 
-export function fromTranslation(out : Matrix3, x : number, y : number) {
+export function fromTranslation(out: Matrix3, x: number, y: number) {
 	out.fill(0);
 	out[0] = 1;
 	out[4] = 1;
@@ -17,7 +17,7 @@ export function fromTranslation(out : Matrix3, x : number, y : number) {
 	return out;
 }
 
-export function fromRotation(out : Matrix3, angle : number) {
+export function fromRotation(out: Matrix3, angle: number) {
 	let c = Math.cos(angle);
 	let s = Math.sin(angle);
 
@@ -31,7 +31,7 @@ export function fromRotation(out : Matrix3, angle : number) {
 	return out;
 }
 
-export function multiply(out : Matrix3, a : Matrix3, b : Matrix3) {
+export function multiply(out: Matrix3, a: Matrix3, b: Matrix3) {
 	let a00 = a[0],
 		a01 = a[1],
 		a02 = a[2];
@@ -63,7 +63,7 @@ export function multiply(out : Matrix3, a : Matrix3, b : Matrix3) {
 	return out;
 }
 
-export function transform(out : Vector2, vec : Vector2, matrix : Matrix3) {
+export function transform(out: Vector2, vec: Vector2, matrix: Matrix3) {
 	let x = vec.x;
 	let y = vec.y;
 	out.x = matrix[0] * x + matrix[3] * y + matrix[6];

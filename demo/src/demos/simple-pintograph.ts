@@ -10,7 +10,7 @@ export default function simplePintograph(scene: Pintograph.Scene) {
 		mountedAt2: wheel2.mountPoint,
 		length1: 300,
 		length2: 400,
-		flip: false
+		flip: false,
 	});
 
 	let pen = new Pintograph.Pen(arm.mountPoint, '#000');

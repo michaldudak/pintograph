@@ -1,20 +1,32 @@
-import { MountPoint } from "./MountPoint.js";
-import { SceneObject } from "./SceneObject.js";
-import { Matrix3, identity, fromRotation, fromTranslation, multiply, transform } from '../math/Matrices.js';
-import { drawMountPoint } from "./rendering/drawMountPoint.js";
-import { EasingFunction, easingFunctions } from "./EasingFunction.js";
+import { MountPoint } from './MountPoint.js';
+import { SceneObject } from './SceneObject.js';
+import {
+	Matrix3,
+	identity,
+	fromRotation,
+	fromTranslation,
+	multiply,
+	transform,
+} from '../math/Matrices.js';
+import { drawMountPoint } from './rendering/drawMountPoint.js';
+import { EasingFunction, easingFunctions } from './EasingFunction.js';
 
 export class Oscillator implements SceneObject {
+	public mountPoint: MountPoint = { transformation: identity() };
+	public easingFunction: EasingFunction;
 
-	public mountPoint : MountPoint = { transformation: identity() }
-	public easingFunction : EasingFunction;
+	private currentPosition: number = 0;
+	private localRotation: Matrix3 = identity();
+	private localTranslation: Matrix3 = identity();
+	private localTransformation: Matrix3 = identity();
 
-	private currentPosition : number = 0;
-	private localRotation : Matrix3 = identity();
-	private localTranslation : Matrix3 = identity();
-	private localTransformation : Matrix3 = identity();
-
-	constructor(private mountedAt : MountPoint, public length : number, public angle : number, public speed : number, easingFunction ?: EasingFunction) {
+	constructor(
+		private mountedAt: MountPoint,
+		public length: number,
+		public angle: number,
+		public speed: number,
+		easingFunction?: EasingFunction
+	) {
 		if (!easingFunction) {
 			this.easingFunction = easingFunctions.sine;
 		} else {
@@ -23,18 +35,21 @@ export class Oscillator implements SceneObject {
 	}
 
 	step(elapsedTime: number, deltaTime: number) {
-		this.currentPosition = this.easingFunction(elapsedTime * this.speed) * this.length - this.length * 0.5;
+		this.currentPosition =
+			this.easingFunction(elapsedTime * this.speed) * this.length - this.length * 0.5;
 		fromRotation(this.localRotation, this.angle);
 		fromTranslation(this.localTranslation, this.currentPosition, 0);
 		multiply(this.localTransformation, this.localRotation, this.localTranslation);
-		multiply(this.mountPoint.transformation, this.mountedAt.transformation, this.localTransformation);
+		multiply(
+			this.mountPoint.transformation,
+			this.mountedAt.transformation,
+			this.localTransformation
+		);
 	}
 
 	drawDebug(context: CanvasRenderingContext2D) {
-		let end1 = { x: (-this.length / 2) - this.currentPosition, y: 0 };
-		let end2 = { x: (this.length / 2) - this.currentPosition, y: 0 };
-
-
+		let end1 = { x: -this.length / 2 - this.currentPosition, y: 0 };
+		let end2 = { x: this.length / 2 - this.currentPosition, y: 0 };
 
 		transform(end1, end1, this.mountPoint.transformation);
 		transform(end2, end2, this.mountPoint.transformation);
@@ -48,5 +63,4 @@ export class Oscillator implements SceneObject {
 
 		drawMountPoint(context, this.mountPoint.transformation);
 	}
-
 }

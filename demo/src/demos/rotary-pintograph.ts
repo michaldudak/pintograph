@@ -12,7 +12,7 @@ export default function rotaryPintograph(scene: Pintograph.Scene) {
 		mountedAt2: wheel2.mountPoint,
 		length1: 80,
 		length2: 100,
-		flip: true
+		flip: true,
 	});
 
 	let pen = new Pintograph.Pen(arm.mountPoint, '#000');

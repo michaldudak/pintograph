@@ -5,10 +5,7 @@
 		"moduleResolution": "nodenext",
 		"moduleDetection": "force",
 		"outDir": "./dist",
-		"lib": [
-			"DOM",
-			"ES2022"
-		],
+		"lib": ["DOM", "ES2022"],
 
 		"declaration": true,
 		"declarationMap": true,

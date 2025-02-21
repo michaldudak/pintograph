@@ -1,4 +1,4 @@
-import { Vector2, Matrix3, transform } from "../../math/index.js";
+import { Vector2, Matrix3, transform } from '../../math/index.js';
 
 export function drawMountPoint(context: CanvasRenderingContext2D, transformation: Matrix3) {
 	let mountPointDisplayCoords: Vector2[] = [
@@ -14,7 +14,7 @@ export function drawMountPoint(context: CanvasRenderingContext2D, transformation
 		{ x: -6, y: 2 },
 		{ x: -2, y: 2 },
 		{ x: -2, y: 6 },
-		{ x: 2, y: 6 }
+		{ x: 2, y: 6 },
 	];
 
 	context.beginPath();
@@ -22,8 +22,7 @@ export function drawMountPoint(context: CanvasRenderingContext2D, transformation
 		transform(mountPointDisplayCoords[i], mountPointDisplayCoords[i], transformation);
 		if (i === 0) {
 			context.moveTo(mountPointDisplayCoords[i].x, mountPointDisplayCoords[i].y);
-		}
-		else {
+		} else {
 			context.lineTo(mountPointDisplayCoords[i].x, mountPointDisplayCoords[i].y);
 		}
 	}

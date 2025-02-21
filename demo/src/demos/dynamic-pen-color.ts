@@ -15,15 +15,15 @@ export default function dynamicPenColor(scene: Pintograph.Scene) {
 		extensionLength1: 60,
 		length2: 250,
 		extensionLength2: 60,
-		flip: false
-	})
+		flip: false,
+	});
 
 	let arm = new Pintograph.VArm({
 		mountedAt1: xArm.mountPoint1,
 		mountedAt2: xArm.mountPoint2,
 		length1: 60,
 		length2: 60,
-		flip: true
+		flip: true,
 	});
 
 	let pen = new Pintograph.Pen(arm.mountPoint, (t) => `hsl(${(t * 4) % 360}, 80%, 60%)`);

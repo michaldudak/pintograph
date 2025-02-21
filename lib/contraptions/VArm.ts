@@ -1,33 +1,45 @@
-import { Vector2, Matrix3, fromTranslation, identity, multiply, transform, distance, EPSILON, circleCircleIntersection, fromRotation, getAngle, subtractVectors } from "../math/index.js";
-import { MountPoint } from "./MountPoint.js";
-import { SceneObject } from "./SceneObject.js";
-import { drawMountPoint } from "./rendering/drawMountPoint.js";
+import {
+	Vector2,
+	Matrix3,
+	fromTranslation,
+	identity,
+	multiply,
+	transform,
+	distance,
+	EPSILON,
+	circleCircleIntersection,
+	fromRotation,
+	getAngle,
+	subtractVectors,
+} from '../math/index.js';
+import { MountPoint } from './MountPoint.js';
+import { SceneObject } from './SceneObject.js';
+import { drawMountPoint } from './rendering/drawMountPoint.js';
 
 export interface VArmParameters {
-	mountedAt1 : MountPoint;
-	mountedAt2 : MountPoint;
-	length1 : number;
-	length2 : number;
-	flip : boolean;
+	mountedAt1: MountPoint;
+	mountedAt2: MountPoint;
+	length1: number;
+	length2: number;
+	flip: boolean;
 }
 
 export class VArm implements SceneObject {
+	public mountPoint: MountPoint = { transformation: identity() };
 
-	public mountPoint : MountPoint = { transformation: identity() };
+	public mountedAt1: MountPoint;
+	public mountedAt2: MountPoint;
+	public length1: number;
+	public length2: number;
+	public flip: boolean;
 
-	public mountedAt1 : MountPoint;
-	public mountedAt2 : MountPoint;
-	public length1 : number;
-	public length2 : number;
-	public flip : boolean;
+	private mountedAt1WS: Vector2 = { x: 0, y: 0 };
+	private mountedAt2WS: Vector2 = { x: 0, y: 0 };
 
-	private mountedAt1WS : Vector2 = { x: 0, y: 0 };
-	private mountedAt2WS : Vector2 = { x: 0, y: 0 };
+	private mountPointTranslation: Matrix3 = identity();
+	private mountPointRotation: Matrix3 = identity();
 
-	private mountPointTranslation : Matrix3 = identity();
-	private mountPointRotation : Matrix3 = identity();
-
-	constructor(parameters : VArmParameters) {
+	constructor(parameters: VArmParameters) {
 		this.mountedAt1 = parameters.mountedAt1;
 		this.mountedAt2 = parameters.mountedAt2;
 		this.length1 = parameters.length1;
@@ -41,14 +53,19 @@ export class VArm implements SceneObject {
 
 		let d = distance(this.mountedAt1WS, this.mountedAt2WS);
 		if (d < EPSILON) {
-			throw new Error("Mount points are placed too close to each other.");
+			throw new Error('Mount points are placed too close to each other.');
 		}
 
 		if (d > this.length1 + this.length2) {
-			throw new Error("Arms are too short.");
+			throw new Error('Arms are too short.');
 		}
 
-		let possibleMountPoints = circleCircleIntersection(this.mountedAt1WS, this.length1, this.mountedAt2WS, this.length2);
+		let possibleMountPoints = circleCircleIntersection(
+			this.mountedAt1WS,
+			this.length1,
+			this.mountedAt2WS,
+			this.length2
+		);
 		let mountPointPosition = this.flip ? possibleMountPoints[1] : possibleMountPoints[0];
 		let mountPointRotationVector = subtractVectors(mountPointPosition, this.mountedAt1WS);
 		let mountPointRotation = getAngle(mountPointRotationVector);
@@ -60,8 +77,8 @@ export class VArm implements SceneObject {
 	}
 
 	drawDebug(context: CanvasRenderingContext2D) {
-		let mountPointWS = {x: 0, y: 0};
-		transform(mountPointWS, {x: 0, y: 0}, this.mountPoint.transformation);
+		let mountPointWS = { x: 0, y: 0 };
+		transform(mountPointWS, { x: 0, y: 0 }, this.mountPoint.transformation);
 
 		context.beginPath();
 		context.moveTo(this.mountedAt1WS.x, this.mountedAt1WS.y);

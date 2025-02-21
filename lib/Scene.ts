@@ -1,9 +1,8 @@
 import { Pen, SceneObject } from './contraptions/index.js';
 
 export class Scene {
-
-	public objects : SceneObject[] = [];
-	public pens : Pen[] = [];
+	public objects: SceneObject[] = [];
+	public pens: Pen[] = [];
 
 	public stepsPerFrame = 10;
 	public frameTime = 1 / 60;
@@ -12,7 +11,10 @@ export class Scene {
 	private simulationTime = 0;
 	private previousStepTimestamp = 0;
 
-	constructor(private renderContext : CanvasRenderingContext2D, private contraptionRenderContext ?: CanvasRenderingContext2D) {}
+	constructor(
+		private renderContext: CanvasRenderingContext2D,
+		private contraptionRenderContext?: CanvasRenderingContext2D
+	) {}
 
 	run() {
 		if (this._isRunning) {
@@ -33,8 +35,8 @@ export class Scene {
 		this.previousStepTimestamp = 0;
 	}
 
-	get isRunning() : boolean {
-		return this._isRunning
+	get isRunning(): boolean {
+		return this._isRunning;
 	}
 
 	private processFrame() {
@@ -51,9 +53,7 @@ export class Scene {
 		this.contraptionRenderContext && this.drawDebug(this.contraptionRenderContext);
 	}
 
-
-	step(elapsedTime : number) {
-
+	step(elapsedTime: number) {
 		let timeStep = elapsedTime - this.previousStepTimestamp;
 		this.previousStepTimestamp = elapsedTime;
 
@@ -66,17 +66,16 @@ export class Scene {
 		}
 	}
 
-	private draw(context : CanvasRenderingContext2D) {
+	private draw(context: CanvasRenderingContext2D) {
 		for (let i = 0; i < this.pens.length; ++i) {
 			this.pens[i].draw(context);
 		}
 	}
 
-	private drawDebug(context : CanvasRenderingContext2D) {
+	private drawDebug(context: CanvasRenderingContext2D) {
 		context.clearRect(0, 0, context.canvas.width, context.canvas.height);
 		for (let i = 0; i < this.objects.length; ++i) {
 			this.objects[i].drawDebug(context);
 		}
 	}
 }
-
