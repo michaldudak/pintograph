@@ -1,4 +1,4 @@
-import * as Pintograph from '../../../src/index.ts';
+import * as Pintograph from 'pintograph';
 
 export default function properPintograph(scene: Pintograph.Scene) {
 	let mountPoint1 = new Pintograph.StaticMountPoint({ x: 250, y: 500 });

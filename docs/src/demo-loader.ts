@@ -1,4 +1,4 @@
-import * as Pintograph from '../../src/index.ts';
+import * as Pintograph from 'pintograph';
 
 export async function loadDemo(name: string, title: string, rootContainer: Element | null) {
 	if (!rootContainer) {
@@ -14,10 +14,7 @@ export async function loadDemo(name: string, title: string, rootContainer: Eleme
 
 	const codePanel = document.createElement('pre');
 	codePanel.className = 'code';
-	const sourceCode = (await import(`./demos/${name}.ts?raw`)).default.replace(
-		'../../../src/index.ts',
-		'pintograph'
-	);
+	const sourceCode = (await import(`./demos/${name}.ts?raw`)).default;
 	codePanel.innerText = sourceCode;
 
 	const previewPanel = document.createElement('div');

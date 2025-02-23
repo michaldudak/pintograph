@@ -1,4 +1,4 @@
-import * as Pintograph from '../../../src/index.ts';
+import * as Pintograph from 'pintograph';
 
 export default function dynamicPenColor(scene: Pintograph.Scene) {
 	let mountPoint1 = new Pintograph.StaticMountPoint({ x: 250, y: 500 });
@@ -26,7 +26,10 @@ export default function dynamicPenColor(scene: Pintograph.Scene) {
 		flip: true,
 	});
 
-	let pen = new Pintograph.Pen(arm.mountPoint, (t) => `hsl(${(t * 4) % 360}, 80%, 60%)`);
+	let pen = new Pintograph.Pen(
+		arm.mountPoint,
+		(t) => `hsl(${(t * 4) % 360}, 80%, 60%)`
+	);
 
 	scene.objects.push(mountPoint1);
 	scene.objects.push(mountPoint2);
