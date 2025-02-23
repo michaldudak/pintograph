@@ -3,11 +3,11 @@ import * as Pintograph from 'pintograph';
 export default function multiWheelPintograph(scene: Pintograph.Scene) {
 	let m1 = new Pintograph.StaticMountPoint({ x: 25, y: 250 });
 	let m2 = new Pintograph.StaticMountPoint({ x: 200, y: 350 });
-	let m3 = new Pintograph.StaticMountPoint({ x: 400, y: 300 });
+	let m3 = new Pintograph.StaticMountPoint({ x: 380, y: 250 });
 
-	let w1 = new Pintograph.Wheel(m1, 20, 0, 0.2);
-	let w2 = new Pintograph.Wheel(m2, 30, Math.PI / 6, 0.002);
-	let w3 = new Pintograph.Wheel(m3, 20, Math.PI / 6, -0.3);
+	let w1 = new Pintograph.Wheel(m1, 20, 0, -0.15);
+	let w2 = new Pintograph.Wheel(m2, 30, (-3 * Math.PI) / 4, 0.005);
+	let w3 = new Pintograph.Wheel(m3, 40, Math.PI / 2, -0.3);
 
 	let a12 = new Pintograph.XArm({
 		mountedAt1: w1.mountPoint,

@@ -1,8 +1,8 @@
 import * as Pintograph from 'pintograph';
 
 export default function dynamicPenColor(scene: Pintograph.Scene) {
-	let mountPoint1 = new Pintograph.StaticMountPoint({ x: 250, y: 500 });
-	let mountPoint2 = new Pintograph.StaticMountPoint({ x: 550, y: 500 });
+	let mountPoint1 = new Pintograph.StaticMountPoint({ x: 250, y: 400 });
+	let mountPoint2 = new Pintograph.StaticMountPoint({ x: 550, y: 400 });
 	let wheel1 = new Pintograph.Wheel(mountPoint1, 80, 0, -0.303);
 	let subwheel1 = new Pintograph.Wheel(wheel1.mountPoint, 20, 0, 0.909);
 	let wheel2 = new Pintograph.Wheel(mountPoint2, 100, Math.PI / 6, 0.3);
