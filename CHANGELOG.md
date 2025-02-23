@@ -1,8 +1,12 @@
 # Changelog
 
-## 0.3.0
+## 0.3.1
 
 - Released the package as unbundled ESM only.
+
+## ~~0.3.0~~
+
+Invalid release.
 
 ## 0.2.0
 
