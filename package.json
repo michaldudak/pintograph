@@ -4,6 +4,11 @@
   "description": "Pintograph simulator",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js"
+    }
+  },
   "type": "module",
   "author": {
     "name": "Michał Dudak",
@@ -12,7 +17,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/michaldudak/pintograph.git"
+    "url": "git+https://github.com/michaldudak/pintograph.git"
   },
   "homepage": "https://github.com/michaldudak/pintograph#readme",
   "scripts": {
@@ -20,14 +25,17 @@
     "build:docs": "vite build docs",
     "preview": "vite preview docs",
     "dev": "vite docs",
-    "prettier": "prettier --write ."
+    "prettier": "prettier --write .",
+    "publint": "publint ."
   },
   "files": [
-    "dist"
+    "dist",
+    "CHANGELOG.md"
   ],
   "devDependencies": {
     "@types/node": "^22.13.5",
     "prettier": "^3.5.1",
+    "publint": "^0.3.6",
     "rimraf": "^6.0.1",
     "typescript": "^5.7.3",
     "vite": "^6.1.1"
