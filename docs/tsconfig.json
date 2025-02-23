@@ -21,8 +21,8 @@
 		"noUncheckedSideEffectImports": true,
 
 		"paths": {
-			"pintograph": ["../src/index.ts"],
+			"pintograph": ["../src/index.ts"]
 		}
 	},
-	"include": ["src"],
+	"include": ["src"]
 }

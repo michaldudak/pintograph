@@ -1,4 +1,10 @@
-import { Vector2, Matrix3, fromTranslation, identity, multiply } from '../math/index.js';
+import {
+	Vector2,
+	Matrix3,
+	fromTranslation,
+	identity,
+	multiply,
+} from '../math/index.js';
 import { MountPoint } from './MountPoint.js';
 import { SceneObject } from './SceneObject.js';
 import { drawMountPoint } from './rendering/drawMountPoint.js';
@@ -17,7 +23,11 @@ export class StaticMountPoint implements SceneObject, MountPoint {
 	}
 
 	step(elapsedTime: number, deltaTime: number) {
-		multiply(this.transformation, this.localTransformation, this.sceneTransformation);
+		multiply(
+			this.transformation,
+			this.localTransformation,
+			this.sceneTransformation
+		);
 	}
 
 	drawDebug(context: CanvasRenderingContext2D) {

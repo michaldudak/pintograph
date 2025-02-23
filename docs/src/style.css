@@ -13,7 +13,8 @@ h2 {
 body {
 	background: #f0f0f0;
 	font-family:
-		'Segoe UI Variable Display', system-ui, 'Segoe UI', 'San Francisco', Helvetica, sans-serif;
+		'Segoe UI Variable Display', system-ui, 'Segoe UI', 'San Francisco',
+		Helvetica, sans-serif;
 	color: #333;
 	font-size: 14px;
 	box-sizing: border-box;

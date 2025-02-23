@@ -36,10 +36,15 @@ export class Oscillator implements SceneObject {
 
 	step(elapsedTime: number, deltaTime: number) {
 		this.currentPosition =
-			this.easingFunction(elapsedTime * this.speed) * this.length - this.length * 0.5;
+			this.easingFunction(elapsedTime * this.speed) * this.length -
+			this.length * 0.5;
 		fromRotation(this.localRotation, this.angle);
 		fromTranslation(this.localTranslation, this.currentPosition, 0);
-		multiply(this.localTransformation, this.localRotation, this.localTranslation);
+		multiply(
+			this.localTransformation,
+			this.localRotation,
+			this.localTranslation
+		);
 		multiply(
 			this.mountPoint.transformation,
 			this.mountedAt.transformation,

@@ -50,7 +50,8 @@ export class Scene {
 		}
 
 		this.draw(this.renderContext);
-		this.contraptionRenderContext && this.drawDebug(this.contraptionRenderContext);
+		this.contraptionRenderContext &&
+			this.drawDebug(this.contraptionRenderContext);
 	}
 
 	step(elapsedTime: number) {

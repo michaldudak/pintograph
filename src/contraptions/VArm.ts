@@ -48,8 +48,16 @@ export class VArm implements SceneObject {
 	}
 
 	step(elapsedTime: number, deltaTime: number) {
-		transform(this.mountedAt1WS, { x: 0, y: 0 }, this.mountedAt1.transformation);
-		transform(this.mountedAt2WS, { x: 0, y: 0 }, this.mountedAt2.transformation);
+		transform(
+			this.mountedAt1WS,
+			{ x: 0, y: 0 },
+			this.mountedAt1.transformation
+		);
+		transform(
+			this.mountedAt2WS,
+			{ x: 0, y: 0 },
+			this.mountedAt2.transformation
+		);
 
 		let d = distance(this.mountedAt1WS, this.mountedAt2WS);
 		if (d < EPSILON) {
@@ -66,14 +74,27 @@ export class VArm implements SceneObject {
 			this.mountedAt2WS,
 			this.length2
 		);
-		let mountPointPosition = this.flip ? possibleMountPoints[1] : possibleMountPoints[0];
-		let mountPointRotationVector = subtractVectors(mountPointPosition, this.mountedAt1WS);
+		let mountPointPosition = this.flip
+			? possibleMountPoints[1]
+			: possibleMountPoints[0];
+		let mountPointRotationVector = subtractVectors(
+			mountPointPosition,
+			this.mountedAt1WS
+		);
 		let mountPointRotation = getAngle(mountPointRotationVector);
 
 		fromRotation(this.mountPointRotation, mountPointRotation);
-		fromTranslation(this.mountPointTranslation, mountPointPosition.x, mountPointPosition.y);
+		fromTranslation(
+			this.mountPointTranslation,
+			mountPointPosition.x,
+			mountPointPosition.y
+		);
 
-		multiply(this.mountPoint.transformation, this.mountPointTranslation, this.mountPointRotation);
+		multiply(
+			this.mountPoint.transformation,
+			this.mountPointTranslation,
+			this.mountPointRotation
+		);
 	}
 
 	drawDebug(context: CanvasRenderingContext2D) {

@@ -1,6 +1,10 @@
 import * as Pintograph from 'pintograph';
 
-export async function loadDemo(name: string, title: string, rootContainer: Element | null) {
+export async function loadDemo(
+	name: string,
+	title: string,
+	rootContainer: Element | null
+) {
 	if (!rootContainer) {
 		console.error('No container found for demo:', name);
 		return;

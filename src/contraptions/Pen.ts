@@ -23,7 +23,11 @@ export class Pen implements SceneObject {
 	}
 
 	step(elapsedTime: number, deltaTime: number) {
-		transform(this.worldPosition, { x: 0, y: 0 }, this.mountedAt.transformation);
+		transform(
+			this.worldPosition,
+			{ x: 0, y: 0 },
+			this.mountedAt.transformation
+		);
 		this.drawBuffer.push({
 			...this.worldPosition,
 			color: this.color(elapsedTime),

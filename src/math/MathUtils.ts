@@ -3,7 +3,12 @@ import { Vector2, distance } from './Vectors.js';
 export const EPSILON = 0.0001;
 export const PI_INV = 1 / Math.PI;
 
-export function circleCircleIntersection(p0: Vector2, r0: number, p1: Vector2, r1: number) {
+export function circleCircleIntersection(
+	p0: Vector2,
+	r0: number,
+	p1: Vector2,
+	r1: number
+) {
 	// based on http://paulbourke.net/geometry/circlesphere/
 	var d = distance(p0, p1);
 	if (d > r0 + r1) {

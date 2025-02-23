@@ -60,8 +60,16 @@ export class XArm implements SceneObject {
 	}
 
 	step(elapsedTime: number, deltaTime: number) {
-		transform(this.mountedAt1WS, { x: 0, y: 0 }, this.mountedAt1.transformation);
-		transform(this.mountedAt2WS, { x: 0, y: 0 }, this.mountedAt2.transformation);
+		transform(
+			this.mountedAt1WS,
+			{ x: 0, y: 0 },
+			this.mountedAt1.transformation
+		);
+		transform(
+			this.mountedAt2WS,
+			{ x: 0, y: 0 },
+			this.mountedAt2.transformation
+		);
 
 		let d = distance(this.mountedAt1WS, this.mountedAt2WS);
 		if (d < EPSILON) {
@@ -82,8 +90,14 @@ export class XArm implements SceneObject {
 			? possibleIntersectionPoints[1]
 			: possibleIntersectionPoints[0];
 
-		let base1ToIntersection = subtractVectors(intersectionPointPosition, this.mountedAt1WS);
-		let base2ToIntersection = subtractVectors(intersectionPointPosition, this.mountedAt2WS);
+		let base1ToIntersection = subtractVectors(
+			intersectionPointPosition,
+			this.mountedAt1WS
+		);
+		let base2ToIntersection = subtractVectors(
+			intersectionPointPosition,
+			this.mountedAt2WS
+		);
 
 		let arm1 = multiplyVector(
 			normalizeVector(base1ToIntersection),
@@ -97,8 +111,14 @@ export class XArm implements SceneObject {
 		let mountPoint1Position = addVectors(this.mountedAt1WS, arm1);
 		let mountPoint2Position = addVectors(this.mountedAt2WS, arm2);
 
-		let mountPoint1RotationVector = subtractVectors(mountPoint1Position, this.mountedAt1WS);
-		let mountPoint2RotationVector = subtractVectors(mountPoint2Position, this.mountedAt2WS);
+		let mountPoint1RotationVector = subtractVectors(
+			mountPoint1Position,
+			this.mountedAt1WS
+		);
+		let mountPoint2RotationVector = subtractVectors(
+			mountPoint2Position,
+			this.mountedAt2WS
+		);
 
 		let mountPoint1Rotation = getAngle(mountPoint1RotationVector);
 		let mountPoint2Rotation = getAngle(mountPoint2RotationVector);
@@ -106,8 +126,16 @@ export class XArm implements SceneObject {
 		fromRotation(this.mountPoint1Rotation, mountPoint1Rotation);
 		fromRotation(this.mountPoint2Rotation, mountPoint2Rotation);
 
-		fromTranslation(this.mountPoint1Translation, mountPoint1Position.x, mountPoint1Position.y);
-		fromTranslation(this.mountPoint2Translation, mountPoint2Position.x, mountPoint2Position.y);
+		fromTranslation(
+			this.mountPoint1Translation,
+			mountPoint1Position.x,
+			mountPoint1Position.y
+		);
+		fromTranslation(
+			this.mountPoint2Translation,
+			mountPoint2Position.x,
+			mountPoint2Position.y
+		);
 
 		multiply(
 			this.mountPoint1.transformation,

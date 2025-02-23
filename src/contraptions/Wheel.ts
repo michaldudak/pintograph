@@ -33,10 +33,16 @@ export class Wheel implements SceneObject {
 	}
 
 	step(elapsedTime: number, deltaTime: number) {
-		this.currentAngle = (this.startAngle + 2 * Math.PI * this.speed * elapsedTime) % (2 * Math.PI);
+		this.currentAngle =
+			(this.startAngle + 2 * Math.PI * this.speed * elapsedTime) %
+			(2 * Math.PI);
 		fromRotation(this.rotationMatrix, this.currentAngle);
 		fromTranslation(this.translationMatrix, this.radius, 0);
-		multiply(this.localTransformation, this.rotationMatrix, this.translationMatrix);
+		multiply(
+			this.localTransformation,
+			this.rotationMatrix,
+			this.translationMatrix
+		);
 		multiply(
 			this.mountPoint.transformation,
 			this.mountedAt.transformation,
