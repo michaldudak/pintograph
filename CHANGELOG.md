@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.0
+
+- Released the package as unbundled ESM only.
+
 ## 0.2.0
 
 Massive overhaul of the whole library:
