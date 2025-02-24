@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.0
+
+- Removed the need to register every object within the Scene. Only Pens need to be registered now (using `Scene.registerPen`).
+
 ## 0.3.1
 
 - Released the package as unbundled ESM only.
