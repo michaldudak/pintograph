@@ -46,19 +46,39 @@ export async function loadDemo(
 	let scene = new Pintograph.Scene();
 	demo(scene, artContext);
 
-	let startButton = document.createElement('button');
-	startButton.innerText = 'Start';
-	startButton.addEventListener('click', () => scene.run());
+	let toggleButton = document.createElement('button');
+	toggleButton.innerText = 'Start';
+	toggleButton.addEventListener('click', () => {
+		if (scene.isRunning) {
+			scene.stop();
+			toggleButton.innerText = 'Start';
+			stepButton.disabled = false;
+		} else {
+			scene.run();
+			toggleButton.innerText = 'Stop';
+			stepButton.disabled = true;
+		}
+	});
 
-	let stopButton = document.createElement('button');
-	stopButton.innerText = 'Stop';
-	stopButton.addEventListener('click', () => scene.stop());
+	let stepButton = document.createElement('button');
+	stepButton.innerText = 'Step';
+	stepButton.addEventListener('click', () => {
+		scene.step();
+	});
+
+	let resetButton = document.createElement('button');
+	resetButton.innerText = 'Reset';
+	resetButton.addEventListener('click', () => {
+		scene.reset();
+		artContext.clearRect(0, 0, artCanvas.width, artCanvas.height);
+	});
 
 	let buttonsContainer = document.createElement('div');
 	buttonsContainer.className = 'controls';
 
-	buttonsContainer.appendChild(startButton);
-	buttonsContainer.appendChild(stopButton);
+	buttonsContainer.appendChild(toggleButton);
+	buttonsContainer.appendChild(stepButton);
+	buttonsContainer.appendChild(resetButton);
 
 	previewPanel.appendChild(buttonsContainer);
 

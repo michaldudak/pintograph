@@ -14,6 +14,10 @@ export class Pen implements SceneObject {
 	public getParents = () =>
 		this.mountedAt.owner ? [this.mountedAt.owner] : EMPTY_ARRAY;
 
+	public reset() {
+		this.drawBuffer = [];
+	}
+
 	private worldPosition: Vector2 = { x: 0, y: 0 };
 	private drawBuffer: DrawBufferItem[] = [];
 

@@ -38,9 +38,11 @@ export class Scene {
 	}
 
 	reset() {
-		this.stop();
 		this.simulationTime = 0;
 		this.previousStepTimestamp = 0;
+		for (let pen of this.pens) {
+			pen.reset();
+		}
 	}
 
 	registerPen(pen: Pen) {

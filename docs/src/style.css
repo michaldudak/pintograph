@@ -108,6 +108,11 @@ h2 {
 	color: #fff;
 }
 
+.controls button:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
 .code {
 	font-size: 0.85rem;
 	letter-spacing: -0.03em;
