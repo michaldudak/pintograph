@@ -1,8 +1,7 @@
 import { Pen, SceneObject } from './contraptions/index.js';
 
 export class Scene {
-	public objects: SceneObject[] = [];
-	public pens: Pen[] = [];
+	private pens: Set<Pen> = new Set();
 
 	public stepsPerFrame = 10;
 	public frameTime = 1 / 60;
@@ -11,8 +10,6 @@ export class Scene {
 	private simulationTime = 0;
 	private previousStepTimestamp = 0;
 
-	constructor(private contraptionRenderContext?: CanvasRenderingContext2D) {}
-
 	run() {
 		if (this._isRunning) {
 			return;
@@ -20,6 +17,20 @@ export class Scene {
 
 		this._isRunning = true;
 		this.processFrame();
+	}
+
+	step(stepTime?: number) {
+		if (this._isRunning) {
+			return;
+		}
+
+		if (!stepTime) {
+			stepTime = this.frameTime / this.stepsPerFrame;
+		}
+
+		this.updateObjects(this.simulationTime);
+		this.simulationTime += stepTime;
+		this.draw();
 	}
 
 	stop() {
@@ -32,6 +43,14 @@ export class Scene {
 		this.previousStepTimestamp = 0;
 	}
 
+	registerPen(pen: Pen) {
+		this.pens.add(pen);
+	}
+
+	unregisterPen(pen: Pen) {
+		this.pens.delete(pen);
+	}
+
 	get isRunning(): boolean {
 		return this._isRunning;
 	}
@@ -42,38 +61,51 @@ export class Scene {
 		}
 
 		for (let i = 0; i < this.stepsPerFrame; ++i) {
-			this.step(this.simulationTime);
+			this.updateObjects(this.simulationTime);
 			this.simulationTime += this.frameTime / this.stepsPerFrame;
 		}
 
 		this.draw();
-		this.contraptionRenderContext &&
-			this.drawDebug(this.contraptionRenderContext);
 	}
 
-	step(elapsedTime: number) {
+	private updateObjects(elapsedTime: number) {
 		let timeStep = elapsedTime - this.previousStepTimestamp;
 		this.previousStepTimestamp = elapsedTime;
 
-		for (let i = 0; i < this.objects.length; ++i) {
-			this.objects[i].step(elapsedTime, timeStep);
+		const updatedObjects = new Set<SceneObject>();
+
+		for (let pen of this.pens) {
+			this.updateObjectsInternal(elapsedTime, timeStep, pen, updatedObjects);
+		}
+	}
+
+	private updateObjectsInternal(
+		elapsedTime: number,
+		timeStep: number,
+		objectToUpdate: SceneObject,
+		updatedObjects: Set<SceneObject>
+	) {
+		if (updatedObjects.has(objectToUpdate)) {
+			return;
 		}
 
-		for (let i = 0; i < this.pens.length; ++i) {
-			this.pens[i].step(elapsedTime, timeStep);
+		let parents = objectToUpdate.getParents();
+		for (let i = 0; i < parents.length; ++i) {
+			this.updateObjectsInternal(
+				elapsedTime,
+				timeStep,
+				parents[i],
+				updatedObjects
+			);
 		}
+
+		objectToUpdate.step(elapsedTime, timeStep);
+		updatedObjects.add(objectToUpdate);
 	}
 
 	private draw() {
-		for (let i = 0; i < this.pens.length; ++i) {
-			this.pens[i].draw();
-		}
-	}
-
-	private drawDebug(context: CanvasRenderingContext2D) {
-		context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-		for (let i = 0; i < this.objects.length; ++i) {
-			this.objects[i].drawDebug(context);
+		for (let pen of this.pens) {
+			pen.draw();
 		}
 	}
 }

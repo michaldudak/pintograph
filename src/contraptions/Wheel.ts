@@ -10,9 +10,13 @@ import {
 	transform,
 } from '../math/Matrices.js';
 
+const EMPTY_ARRAY: SceneObject[] = [];
+
 export class Wheel implements SceneObject {
 	private localTransformation: Matrix3;
 	public readonly mountPoint: MountPoint;
+	public getParents = () =>
+		this.mountedAt.owner ? [this.mountedAt.owner] : EMPTY_ARRAY;
 
 	private currentAngle: number;
 
@@ -29,7 +33,7 @@ export class Wheel implements SceneObject {
 		this.rotationMatrix = identity();
 		this.translationMatrix = identity();
 		this.localTransformation = identity();
-		this.mountPoint = { transformation: identity() };
+		this.mountPoint = { transformation: identity(), owner: this };
 	}
 
 	step(elapsedTime: number, deltaTime: number) {

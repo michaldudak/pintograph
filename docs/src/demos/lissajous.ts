@@ -12,10 +12,7 @@ export default function lissajous(
 		-Math.PI / 2,
 		0.5
 	);
-	let pen = new Pintograph.Pen(vOscillator.mountPoint, context, '#000');
 
-	scene.objects.push(mountPoint);
-	scene.objects.push(hOscillator);
-	scene.objects.push(vOscillator);
-	scene.pens.push(pen);
+	let pen = new Pintograph.Pen(vOscillator.mountPoint, context, '#000');
+	scene.registerPen(pen);
 }

@@ -19,12 +19,5 @@ export default function rotaryPintograph(
 	});
 
 	let pen = new Pintograph.Pen(arm.mountPoint, context, '#000');
-
-	scene.objects.push(center);
-	scene.objects.push(baseWheel1);
-	scene.objects.push(baseWheel2);
-	scene.objects.push(wheel1);
-	scene.objects.push(wheel2);
-	scene.objects.push(arm);
-	scene.pens.push(pen);
+	scene.registerPen(pen);
 }

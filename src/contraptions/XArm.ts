@@ -30,8 +30,8 @@ export interface XArmParameters {
 }
 
 export class XArm implements SceneObject {
-	public mountPoint1: MountPoint = { transformation: identity() };
-	public mountPoint2: MountPoint = { transformation: identity() };
+	public mountPoint1: MountPoint = { transformation: identity(), owner: this };
+	public mountPoint2: MountPoint = { transformation: identity(), owner: this };
 
 	public mountedAt1: MountPoint;
 	public mountedAt2: MountPoint;
@@ -40,6 +40,11 @@ export class XArm implements SceneObject {
 	public extensionLength1: number;
 	public extensionLength2: number;
 	public flip: boolean;
+
+	public getParents = () =>
+		[this.mountedAt1.owner, this.mountedAt2.owner].filter(
+			(parent) => parent
+		) as SceneObject[];
 
 	private mountedAt1WS: Vector2 = { x: 0, y: 0 };
 	private mountedAt2WS: Vector2 = { x: 0, y: 0 };

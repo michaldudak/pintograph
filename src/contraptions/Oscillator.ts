@@ -11,9 +11,13 @@ import {
 import { drawMountPoint } from './rendering/drawMountPoint.js';
 import { EasingFunction, easingFunctions } from './EasingFunction.js';
 
+const EMPTY_ARRAY: SceneObject[] = [];
+
 export class Oscillator implements SceneObject {
-	public mountPoint: MountPoint = { transformation: identity() };
+	public mountPoint: MountPoint = { transformation: identity(), owner: this };
 	public easingFunction: EasingFunction;
+	public getParents = () =>
+		this.mountedAt.owner ? [this.mountedAt.owner] : EMPTY_ARRAY;
 
 	private currentPosition: number = 0;
 	private localRotation: Matrix3 = identity();

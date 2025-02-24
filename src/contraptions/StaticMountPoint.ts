@@ -9,8 +9,13 @@ import { MountPoint } from './MountPoint.js';
 import { SceneObject } from './SceneObject.js';
 import { drawMountPoint } from './rendering/drawMountPoint.js';
 
+const GET_EMPTY_ARRAY = () => [] as SceneObject[];
+
 export class StaticMountPoint implements SceneObject, MountPoint {
 	public readonly transformation: Matrix3;
+	public readonly owner = this;
+	public getParents = GET_EMPTY_ARRAY;
+
 	private localTransformation: Matrix3;
 	private sceneTransformation: Matrix3;
 

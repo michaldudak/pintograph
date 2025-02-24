@@ -6,8 +6,13 @@ interface DrawBufferItem extends Vector2 {
 	color: string;
 }
 
+const EMPTY_ARRAY: SceneObject[] = [];
+
 export class Pen implements SceneObject {
 	public color: (elapsedTime: number) => string;
+
+	public getParents = () =>
+		this.mountedAt.owner ? [this.mountedAt.owner] : EMPTY_ARRAY;
 
 	private worldPosition: Vector2 = { x: 0, y: 0 };
 	private drawBuffer: DrawBufferItem[] = [];

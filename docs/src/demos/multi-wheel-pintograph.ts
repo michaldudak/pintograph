@@ -33,9 +33,5 @@ export default function multiWheelPintograph(
 	});
 
 	let pen = new Pintograph.Pen(a123.mountPoint2, context, '#000');
-
-	scene.objects.push(m1, m2, m3);
-	scene.objects.push(w1, w2, w3);
-	scene.objects.push(a12, a123);
-	scene.pens.push(pen);
+	scene.registerPen(pen);
 }

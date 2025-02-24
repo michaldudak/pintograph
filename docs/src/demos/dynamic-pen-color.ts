@@ -35,13 +35,5 @@ export default function dynamicPenColor(
 		(t) => `hsl(${(t * 4) % 360}, 80%, 60%)`
 	);
 
-	scene.objects.push(mountPoint1);
-	scene.objects.push(mountPoint2);
-	scene.objects.push(wheel1);
-	scene.objects.push(subwheel1);
-	scene.objects.push(wheel2);
-	scene.objects.push(subwheel2);
-	scene.objects.push(xArm);
-	scene.objects.push(arm);
-	scene.pens.push(pen);
+	scene.registerPen(pen);
 }

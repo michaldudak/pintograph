@@ -43,7 +43,7 @@ export async function loadDemo(
 
 	const demo = (await import(`./demos/${name}.ts`)).default;
 
-	let scene = new Pintograph.Scene(contraptionsContext);
+	let scene = new Pintograph.Scene();
 	demo(scene, artContext);
 
 	let startButton = document.createElement('button');

@@ -17,11 +17,5 @@ export default function simplePintograph(
 	});
 
 	let pen = new Pintograph.Pen(arm.mountPoint, context, '#000');
-
-	scene.objects.push(mountPoint1);
-	scene.objects.push(mountPoint2);
-	scene.objects.push(wheel1);
-	scene.objects.push(wheel2);
-	scene.objects.push(arm);
-	scene.pens.push(pen);
+	scene.registerPen(pen);
 }
