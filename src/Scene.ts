@@ -11,10 +11,7 @@ export class Scene {
 	private simulationTime = 0;
 	private previousStepTimestamp = 0;
 
-	constructor(
-		private renderContext: CanvasRenderingContext2D,
-		private contraptionRenderContext?: CanvasRenderingContext2D
-	) {}
+	constructor(private contraptionRenderContext?: CanvasRenderingContext2D) {}
 
 	run() {
 		if (this._isRunning) {
@@ -49,7 +46,7 @@ export class Scene {
 			this.simulationTime += this.frameTime / this.stepsPerFrame;
 		}
 
-		this.draw(this.renderContext);
+		this.draw();
 		this.contraptionRenderContext &&
 			this.drawDebug(this.contraptionRenderContext);
 	}
@@ -67,9 +64,9 @@ export class Scene {
 		}
 	}
 
-	private draw(context: CanvasRenderingContext2D) {
+	private draw() {
 		for (let i = 0; i < this.pens.length; ++i) {
-			this.pens[i].draw(context);
+			this.pens[i].draw();
 		}
 	}
 

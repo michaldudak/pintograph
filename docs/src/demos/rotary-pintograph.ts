@@ -1,6 +1,9 @@
 import * as Pintograph from 'pintograph';
 
-export default function rotaryPintograph(scene: Pintograph.Scene) {
+export default function rotaryPintograph(
+	scene: Pintograph.Scene,
+	context: CanvasRenderingContext2D
+) {
 	let center = new Pintograph.StaticMountPoint({ x: 250, y: 250 });
 	let baseWheel1 = new Pintograph.Wheel(center, 200, 0, 0.101);
 	let baseWheel2 = new Pintograph.Wheel(center, 200, Math.PI / 5, 0.101);
@@ -15,7 +18,7 @@ export default function rotaryPintograph(scene: Pintograph.Scene) {
 		flip: true,
 	});
 
-	let pen = new Pintograph.Pen(arm.mountPoint, '#000');
+	let pen = new Pintograph.Pen(arm.mountPoint, context, '#000');
 
 	scene.objects.push(center);
 	scene.objects.push(baseWheel1);

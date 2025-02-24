@@ -1,6 +1,9 @@
 import * as Pintograph from 'pintograph';
 
-export default function properPintograph(scene: Pintograph.Scene) {
+export default function properPintograph(
+	scene: Pintograph.Scene,
+	context: CanvasRenderingContext2D
+) {
 	let mountPoint1 = new Pintograph.StaticMountPoint({ x: 250, y: 450 });
 	let mountPoint2 = new Pintograph.StaticMountPoint({ x: 550, y: 450 });
 	let wheel1 = new Pintograph.Wheel(mountPoint1, 80, 0, -0.303);
@@ -26,7 +29,7 @@ export default function properPintograph(scene: Pintograph.Scene) {
 		flip: true,
 	});
 
-	let pen = new Pintograph.Pen(arm.mountPoint, '#000');
+	let pen = new Pintograph.Pen(arm.mountPoint, context, '#000');
 
 	scene.objects.push(mountPoint1);
 	scene.objects.push(mountPoint2);

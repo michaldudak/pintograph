@@ -8,11 +8,13 @@ interface DrawBufferItem extends Vector2 {
 
 export class Pen implements SceneObject {
 	public color: (elapsedTime: number) => string;
+
 	private worldPosition: Vector2 = { x: 0, y: 0 };
 	private drawBuffer: DrawBufferItem[] = [];
 
 	constructor(
 		private mountedAt: MountPoint,
+		private renderingContext: CanvasRenderingContext2D,
 		color: string | ((elapsedTime: number) => string)
 	) {
 		if (typeof color === 'string') {
@@ -36,13 +38,17 @@ export class Pen implements SceneObject {
 
 	drawDebug(context: CanvasRenderingContext2D) {}
 
-	draw(context: CanvasRenderingContext2D) {
+	draw() {
+		const context = this.renderingContext;
 		if (this.drawBuffer.length > 1) {
 			context.beginPath();
 			context.moveTo(this.drawBuffer[0].x, this.drawBuffer[0].y);
 
 			for (let i = 1; i < this.drawBuffer.length; ++i) {
-				context.lineTo(this.drawBuffer[i].x, this.drawBuffer[i].y);
+				this.renderingContext.lineTo(
+					this.drawBuffer[i].x,
+					this.drawBuffer[i].y
+				);
 			}
 
 			context.strokeStyle = this.drawBuffer[0].color;

@@ -1,6 +1,9 @@
 import * as Pintograph from 'pintograph';
 
-export default function dynamicPenColor(scene: Pintograph.Scene) {
+export default function dynamicPenColor(
+	scene: Pintograph.Scene,
+	context: CanvasRenderingContext2D
+) {
 	let mountPoint1 = new Pintograph.StaticMountPoint({ x: 250, y: 400 });
 	let mountPoint2 = new Pintograph.StaticMountPoint({ x: 550, y: 400 });
 	let wheel1 = new Pintograph.Wheel(mountPoint1, 80, 0, -0.303);
@@ -28,6 +31,7 @@ export default function dynamicPenColor(scene: Pintograph.Scene) {
 
 	let pen = new Pintograph.Pen(
 		arm.mountPoint,
+		context,
 		(t) => `hsl(${(t * 4) % 360}, 80%, 60%)`
 	);
 
