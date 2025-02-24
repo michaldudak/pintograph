@@ -5,6 +5,7 @@ export class Scene {
 
 	public stepsPerFrame = 10;
 	public frameTime = 1 / 60;
+	public timeScale = 1;
 
 	private _isRunning = false;
 	private simulationTime = 0;
@@ -29,7 +30,7 @@ export class Scene {
 		}
 
 		this.updateObjects(this.simulationTime);
-		this.simulationTime += stepTime;
+		this.simulationTime += stepTime * this.timeScale;
 		this.draw();
 	}
 
@@ -64,7 +65,8 @@ export class Scene {
 
 		for (let i = 0; i < this.stepsPerFrame; ++i) {
 			this.updateObjects(this.simulationTime);
-			this.simulationTime += this.frameTime / this.stepsPerFrame;
+			this.simulationTime +=
+				(this.timeScale * this.frameTime) / this.stepsPerFrame;
 		}
 
 		this.draw();
@@ -91,12 +93,12 @@ export class Scene {
 			return;
 		}
 
-		let parents = objectToUpdate.getParents();
+		let parents = objectToUpdate.getParentMountPoints();
 		for (let i = 0; i < parents.length; ++i) {
 			this.updateObjectsInternal(
 				elapsedTime,
 				timeStep,
-				parents[i],
+				parents[i].owner,
 				updatedObjects
 			);
 		}

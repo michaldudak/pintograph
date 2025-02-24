@@ -1,4 +1,5 @@
 export * from './EasingFunction.js';
+export * from './MountPoint.js';
 export * from './Oscillator.js';
 export * from './Pen.js';
 export * from './SceneObject.js';

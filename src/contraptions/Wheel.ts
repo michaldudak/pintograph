@@ -10,13 +10,13 @@ import {
 	transform,
 } from '../math/Matrices.js';
 
-const EMPTY_ARRAY: SceneObject[] = [];
+const EMPTY_ARRAY: MountPoint[] = [];
 
 export class Wheel implements SceneObject {
 	private localTransformation: Matrix3;
 	public readonly mountPoint: MountPoint;
-	public getParents = () =>
-		this.mountedAt.owner ? [this.mountedAt.owner] : EMPTY_ARRAY;
+	public getParentMountPoints = () =>
+		this.mountedAt ? [this.mountedAt] : EMPTY_ARRAY;
 
 	private currentAngle: number;
 

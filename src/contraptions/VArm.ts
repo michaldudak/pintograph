@@ -26,10 +26,8 @@ export interface VArmParameters {
 
 export class VArm implements SceneObject {
 	public mountPoint: MountPoint = { transformation: identity(), owner: this };
-	public getParents = () =>
-		[this.mountedAt1.owner, this.mountedAt2.owner].filter(
-			(parent) => parent
-		) as SceneObject[];
+	public getParentMountPoints = () =>
+		[this.mountedAt1, this.mountedAt2].filter(Boolean);
 
 	public mountedAt1: MountPoint;
 	public mountedAt2: MountPoint;

@@ -41,10 +41,8 @@ export class XArm implements SceneObject {
 	public extensionLength2: number;
 	public flip: boolean;
 
-	public getParents = () =>
-		[this.mountedAt1.owner, this.mountedAt2.owner].filter(
-			(parent) => parent
-		) as SceneObject[];
+	public getParentMountPoints = () =>
+		[this.mountedAt1, this.mountedAt2].filter(Boolean);
 
 	private mountedAt1WS: Vector2 = { x: 0, y: 0 };
 	private mountedAt2WS: Vector2 = { x: 0, y: 0 };

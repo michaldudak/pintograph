@@ -6,13 +6,13 @@ interface DrawBufferItem extends Vector2 {
 	color: string;
 }
 
-const EMPTY_ARRAY: SceneObject[] = [];
+const EMPTY_ARRAY: MountPoint[] = [];
 
 export class Pen implements SceneObject {
 	public color: (elapsedTime: number) => string;
 
-	public getParents = () =>
-		this.mountedAt.owner ? [this.mountedAt.owner] : EMPTY_ARRAY;
+	public getParentMountPoints = () =>
+		this.mountedAt ? [this.mountedAt] : EMPTY_ARRAY;
 
 	public reset() {
 		this.drawBuffer = [];
