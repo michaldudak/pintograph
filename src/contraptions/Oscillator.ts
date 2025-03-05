@@ -55,21 +55,4 @@ export class Oscillator implements SceneObject {
 			this.localTransformation
 		);
 	}
-
-	drawDebug(context: CanvasRenderingContext2D) {
-		let end1 = { x: -this.length / 2 - this.currentPosition, y: 0 };
-		let end2 = { x: this.length / 2 - this.currentPosition, y: 0 };
-
-		transform(end1, end1, this.mountPoint.transformation);
-		transform(end2, end2, this.mountPoint.transformation);
-
-		context.beginPath();
-
-		context.moveTo(end1.x, end1.y);
-		context.lineTo(end2.x, end2.y);
-		context.strokeStyle = '#555555';
-		context.stroke();
-
-		drawMountPoint(context, this.mountPoint.transformation);
-	}
 }

@@ -7,7 +7,6 @@ import {
 } from '../math/index.js';
 import { MountPoint } from './MountPoint.js';
 import { SceneObject } from './SceneObject.js';
-import { drawMountPoint } from './rendering/drawMountPoint.js';
 
 const GET_EMPTY_ARRAY = () => [] as MountPoint[];
 
@@ -33,9 +32,5 @@ export class StaticMountPoint implements SceneObject, MountPoint {
 			this.localTransformation,
 			this.sceneTransformation
 		);
-	}
-
-	drawDebug(context: CanvasRenderingContext2D) {
-		drawMountPoint(context, this.transformation);
 	}
 }

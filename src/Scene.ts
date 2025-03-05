@@ -68,6 +68,8 @@ export class Scene {
 		for (let pen of this.pens) {
 			pen.reset();
 		}
+
+		this.updateObjects(targetTime);
 	}
 
 	registerPen(pen: Pen) {

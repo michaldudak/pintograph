@@ -1,13 +1,11 @@
 import { MountPoint } from './MountPoint.js';
 import { SceneObject } from './SceneObject.js';
-import { drawMountPoint } from './rendering/drawMountPoint.js';
 import {
 	Matrix3,
 	identity,
 	fromRotation,
 	fromTranslation,
 	multiply,
-	transform,
 } from '../math/Matrices.js';
 
 const EMPTY_ARRAY: MountPoint[] = [];
@@ -52,18 +50,5 @@ export class Wheel implements SceneObject {
 			this.mountedAt.transformation,
 			this.localTransformation
 		);
-	}
-
-	drawDebug(context: CanvasRenderingContext2D) {
-		let center = { x: 0, y: 0 };
-		transform(center, center, this.mountedAt.transformation);
-
-		context.beginPath();
-
-		context.arc(center.x, center.y, this.radius, 0, Math.PI * 2);
-		context.strokeStyle = '#888888';
-		context.stroke();
-
-		drawMountPoint(context, this.mountPoint.transformation);
 	}
 }

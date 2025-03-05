@@ -45,8 +45,6 @@ export class Pen implements SceneObject {
 		});
 	}
 
-	drawDebug(context: CanvasRenderingContext2D) {}
-
 	draw() {
 		const context = this.renderingContext;
 		if (this.drawBuffer.length > 1) {

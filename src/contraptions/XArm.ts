@@ -1,6 +1,5 @@
 import { SceneObject } from './SceneObject.js';
 import { MountPoint } from './MountPoint.js';
-import { drawMountPoint } from './rendering/drawMountPoint.js';
 import {
 	Vector2,
 	distance,
@@ -150,25 +149,5 @@ export class XArm implements SceneObject {
 			this.mountPoint2Translation,
 			this.mountPoint2Rotation
 		);
-	}
-
-	drawDebug(context: CanvasRenderingContext2D) {
-		let mountPoint1WS = { x: 0, y: 0 };
-		let mountPoint2WS = { x: 0, y: 0 };
-		transform(mountPoint1WS, { x: 0, y: 0 }, this.mountPoint1.transformation);
-		transform(mountPoint2WS, { x: 0, y: 0 }, this.mountPoint2.transformation);
-
-		context.beginPath();
-		context.moveTo(this.mountedAt1WS.x, this.mountedAt1WS.y);
-		context.lineTo(mountPoint1WS.x, mountPoint1WS.y);
-		context.moveTo(this.mountedAt2WS.x, this.mountedAt2WS.y);
-		context.lineTo(mountPoint2WS.x, mountPoint2WS.y);
-		context.lineWidth = 3;
-		context.strokeStyle = 'pink';
-		context.stroke();
-
-		context.lineWidth = 1;
-		drawMountPoint(context, this.mountPoint1.transformation);
-		drawMountPoint(context, this.mountPoint2.transformation);
 	}
 }
