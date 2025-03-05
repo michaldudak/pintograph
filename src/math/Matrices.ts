@@ -17,7 +17,15 @@ export function fromTranslation(out: Matrix3, x: number, y: number) {
 	return out;
 }
 
-export function fromRotation(out: Matrix3, angle: number) {
+export function fromRotation(angle: number): Matrix3;
+export function fromRotation(out: Matrix3, angle: number): Matrix3;
+export function fromRotation(
+	outOrAngle: Matrix3 | number,
+	maybeAngle?: number
+) {
+	const out = typeof outOrAngle === 'number' ? identity() : outOrAngle;
+	const angle = typeof outOrAngle === 'number' ? outOrAngle : maybeAngle!;
+
 	let c = Math.cos(angle);
 	let s = Math.sin(angle);
 
@@ -31,7 +39,13 @@ export function fromRotation(out: Matrix3, angle: number) {
 	return out;
 }
 
-export function multiply(out: Matrix3, a: Matrix3, b: Matrix3) {
+export function multiply(a: Matrix3, b: Matrix3): Matrix3;
+export function multiply(out: Matrix3, a: Matrix3, b: Matrix3): Matrix3;
+export function multiply(outOrA: Matrix3, aOrB: Matrix3, maybeB?: Matrix3) {
+	const out = maybeB ? outOrA : identity();
+	const a = maybeB ? aOrB : outOrA;
+	const b = maybeB ? maybeB : aOrB;
+
 	let a00 = a[0],
 		a01 = a[1],
 		a02 = a[2];
