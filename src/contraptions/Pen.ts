@@ -53,15 +53,32 @@ export class Pen implements SceneObject {
 			context.beginPath();
 			context.moveTo(this.drawBuffer[0].x, this.drawBuffer[0].y);
 
+			let lineDistance = 0;
+
 			for (let i = 1; i < this.drawBuffer.length; ++i) {
 				this.renderingContext.lineTo(
 					this.drawBuffer[i].x,
 					this.drawBuffer[i].y
 				);
+
+				lineDistance += Math.sqrt(
+					Math.pow(this.drawBuffer[i].x - this.drawBuffer[i - 1].x, 2) +
+						Math.pow(this.drawBuffer[i].y - this.drawBuffer[i - 1].y, 2)
+				);
+
+				if (lineDistance >= 3) {
+					context.strokeStyle = this.drawBuffer[i].color;
+					context.stroke();
+					context.beginPath();
+					context.moveTo(this.drawBuffer[i].x, this.drawBuffer[i].y);
+					lineDistance = 0;
+				}
 			}
 
-			context.strokeStyle = this.drawBuffer[0].color;
-			context.stroke();
+			if (lineDistance > 0) {
+				context.strokeStyle = this.drawBuffer[this.drawBuffer.length - 1].color;
+				context.stroke();
+			}
 
 			this.drawBuffer = [this.drawBuffer[this.drawBuffer.length - 1]];
 		}

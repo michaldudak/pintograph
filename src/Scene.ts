@@ -6,6 +6,7 @@ export class Scene {
 	public stepsPerFrame = 10;
 	public frameTime = 1 / 60;
 	public timeScale = 1;
+	public continueOnError = false;
 
 	private _isRunning = false;
 	private simulationTime = 0;
@@ -18,6 +19,29 @@ export class Scene {
 
 		this._isRunning = true;
 		this.processFrame();
+	}
+
+	paintImmediate(endTime: number, startTime: number = 0) {
+		if (endTime <= startTime) {
+			return;
+		}
+
+		this.stop();
+		this.reset(startTime);
+
+		const numberOfSteps = Math.ceil(
+			((endTime - startTime) * this.stepsPerFrame) / this.frameTime
+		);
+
+		this._isRunning = true;
+
+		for (let i = 0; i < numberOfSteps; ++i) {
+			this.updateObjects(this.simulationTime);
+			this.simulationTime += this.frameTime / this.stepsPerFrame;
+		}
+
+		this.draw();
+		this.stop();
 	}
 
 	step(stepTime?: number) {
@@ -38,9 +62,9 @@ export class Scene {
 		this._isRunning = false;
 	}
 
-	reset() {
-		this.simulationTime = 0;
-		this.previousStepTimestamp = 0;
+	reset(targetTime = 0) {
+		this.simulationTime = targetTime;
+		this.previousStepTimestamp = targetTime;
 		for (let pen of this.pens) {
 			pen.reset();
 		}
@@ -79,7 +103,17 @@ export class Scene {
 		const updatedObjects = new Set<SceneObject>();
 
 		for (let pen of this.pens) {
-			this.updateObjectsInternal(elapsedTime, timeStep, pen, updatedObjects);
+			try {
+				this.updateObjectsInternal(elapsedTime, timeStep, pen, updatedObjects);
+			} catch (e) {
+				if (this.continueOnError) {
+					console.warn('The device is stuck.', e);
+					pen.reset();
+				} else {
+					console.error('The device is stuck.', e);
+					this.stop();
+				}
+			}
 		}
 	}
 
