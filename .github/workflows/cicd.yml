@@ -1,10 +1,11 @@
-name: Static code analysis
+name: CI/CD
 
 on:
   push:
+    branches: ['master']
 
 jobs:
-  lint:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -14,11 +15,14 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 20
       - name: Install dependencies
         run: pnpm install
       - name: Code style check
-        run: pnpm exec prettier --check .
-      - run: pnpm build
+        run: pnpm lint
+      - name: Build the package
+        run: pnpm build
       - name: Package verification
         run: pnpm publint
+      - name: Publish to pkg.pr.new
+        run: pnpm dlx pkg-pr-new publish --compact --pnpm
