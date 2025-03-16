@@ -48,7 +48,7 @@ export class VArm implements SceneObject {
 		this.flip = parameters.flip;
 	}
 
-	step(elapsedTime: number, deltaTime: number) {
+	step() {
 		transform(
 			this.mountedAt1WS,
 			{ x: 0, y: 0 },

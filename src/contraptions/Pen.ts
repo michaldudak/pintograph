@@ -33,7 +33,7 @@ export class Pen implements SceneObject {
 		}
 	}
 
-	step(elapsedTime: number, deltaTime: number) {
+	step(elapsedTime: number) {
 		transform(
 			this.worldPosition,
 			{ x: 0, y: 0 },

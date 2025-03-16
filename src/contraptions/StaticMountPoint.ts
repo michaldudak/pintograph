@@ -25,8 +25,7 @@ export class StaticMountPoint implements SceneObject, MountPoint {
 
 		fromTranslation(this.localTransformation, position.x, position.y);
 	}
-
-	step(elapsedTime: number, deltaTime: number) {
+	step() {
 		multiply(
 			this.transformation,
 			this.localTransformation,

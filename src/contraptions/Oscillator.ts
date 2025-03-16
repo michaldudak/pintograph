@@ -6,9 +6,7 @@ import {
 	fromRotation,
 	fromTranslation,
 	multiply,
-	transform,
 } from '../math/Matrices.js';
-import { drawMountPoint } from './rendering/drawMountPoint.js';
 import { EasingFunction, easingFunctions } from './EasingFunction.js';
 
 const EMPTY_ARRAY: MountPoint[] = [];
@@ -38,7 +36,7 @@ export class Oscillator implements SceneObject {
 		}
 	}
 
-	step(elapsedTime: number, deltaTime: number) {
+	step(elapsedTime: number) {
 		this.currentPosition =
 			this.easingFunction(elapsedTime * this.speed) * this.length -
 			this.length * 0.5;

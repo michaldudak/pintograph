@@ -4,13 +4,13 @@ export interface Vector2 {
 }
 
 export function distance(pointA: Vector2, pointB: Vector2) {
-	var xd = pointB.x - pointA.x;
-	var yd = pointB.y - pointA.y;
+	let xd = pointB.x - pointA.x;
+	let yd = pointB.y - pointA.y;
 	return Math.sqrt(xd ** 2 + yd ** 2);
 }
 
 export function normalizeVector(vector: Vector2) {
-	var length = distance({ x: 0, y: 0 }, vector);
+	let length = distance({ x: 0, y: 0 }, vector);
 	if (length == 0) {
 		return { x: 0, y: 0 } as Vector2;
 	}

@@ -10,7 +10,7 @@ export function circleCircleIntersection(
 	r1: number
 ) {
 	// based on http://paulbourke.net/geometry/circlesphere/
-	var d = distance(p0, p1);
+	let d = distance(p0, p1);
 	if (d > r0 + r1) {
 		throw new Error('Circles are separate');
 	} else if (d < Math.abs(r0 - r1)) {
@@ -19,20 +19,20 @@ export function circleCircleIntersection(
 		throw new Error('Circles are coincident');
 	}
 
-	var a = (r0 ** 2 - r1 ** 2 + d ** 2) / (2 * d);
-	var h = Math.sqrt(r0 ** 2 - a ** 2);
+	let a = (r0 ** 2 - r1 ** 2 + d ** 2) / (2 * d);
+	let h = Math.sqrt(r0 ** 2 - a ** 2);
 
-	var p2: Vector2 = {
+	let p2: Vector2 = {
 		x: p0.x + (a * (p1.x - p0.x)) / d,
 		y: p0.y + (a * (p1.y - p0.y)) / d,
 	};
 
-	var p3_1: Vector2 = {
+	let p3_1: Vector2 = {
 		x: p2.x + (h * (p1.y - p0.y)) / d,
 		y: p2.y - (h * (p1.x - p0.x)) / d,
 	};
 
-	var p3_2: Vector2 = {
+	let p3_2: Vector2 = {
 		x: p2.x - (h * (p1.y - p0.y)) / d,
 		y: p2.y + (h * (p1.x - p0.x)) / d,
 	};

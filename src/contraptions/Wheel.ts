@@ -34,7 +34,7 @@ export class Wheel implements SceneObject {
 		this.mountPoint = { transformation: identity(), owner: this };
 	}
 
-	step(elapsedTime: number, deltaTime: number) {
+	step(elapsedTime: number) {
 		this.currentAngle =
 			(this.startAngle + 2 * Math.PI * this.speed * elapsedTime) %
 			(2 * Math.PI);
