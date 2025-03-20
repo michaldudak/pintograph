@@ -1,35 +1,40 @@
-import {
-	Vector2,
-	Matrix3,
-	fromTranslation,
-	identity,
-	multiply,
-} from '../math/index.js';
+import { Vector2, Matrix3, fromTranslation } from '../math/index.js';
 import { MountPoint } from './MountPoint.js';
 import { SceneObject } from './SceneObject.js';
 
 const GET_EMPTY_ARRAY = () => [] as MountPoint[];
 
 export class StaticMountPoint implements SceneObject, MountPoint {
-	public readonly transformation: Matrix3;
+	public transformation: Matrix3;
 	public readonly owner = this;
 	public getParentMountPoints = GET_EMPTY_ARRAY;
 
-	private localTransformation: Matrix3;
-	private sceneTransformation: Matrix3;
+	#x: number;
+	#y: number;
 
-	constructor(position: Vector2, sceneTransformation?: Matrix3) {
-		this.transformation = identity();
-		this.localTransformation = identity();
-		this.sceneTransformation = sceneTransformation ?? identity();
+	public get x() {
+		return this.#x;
+	}
 
-		fromTranslation(this.localTransformation, position.x, position.y);
+	public set x(value: number) {
+		this.#x = value;
+		fromTranslation(this.transformation, value, this.#y);
 	}
-	step() {
-		multiply(
-			this.transformation,
-			this.localTransformation,
-			this.sceneTransformation
-		);
+
+	public get y() {
+		return this.#x;
 	}
+
+	public set y(value: number) {
+		this.#y = value;
+		fromTranslation(this.transformation, this.#x, value);
+	}
+
+	constructor(position: Vector2) {
+		this.#x = position.x;
+		this.#y = position.y;
+		this.transformation = fromTranslation(position.x, position.y);
+	}
+
+	step() {}
 }

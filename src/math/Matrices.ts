@@ -6,7 +6,17 @@ export function identity(): Matrix3 {
 	return new Float32Array([1, 0, 0, 0, 1, 0, 0, 0, 1]);
 }
 
-export function fromTranslation(out: Matrix3, x: number, y: number) {
+export function fromTranslation(x: number, y: number): Matrix3;
+export function fromTranslation(out: Matrix3, x: number, y: number): Matrix3;
+export function fromTranslation(
+	outOrX: Matrix3 | number,
+	xOrY: number,
+	maybeY?: number
+) {
+	const out = typeof outOrX === 'number' ? identity() : outOrX;
+	const x = typeof outOrX === 'number' ? outOrX : xOrY;
+	const y = typeof outOrX === 'number' ? xOrY : maybeY!;
+
 	out.fill(0);
 	out[0] = 1;
 	out[4] = 1;
