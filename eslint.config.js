@@ -4,7 +4,7 @@ import pluginJs from '@eslint/js';
 import tseslint from 'typescript-eslint';
 
 export default defineConfig([
-	globalIgnores(['dist/**', 'node_modules/**']),
+	globalIgnores(['dist/**', 'node_modules/**', 'docs/dist/**']),
 	{
 		files: ['**/*.{js,mjs,cjs,ts}'],
 		languageOptions: { globals: globals.browser },
