@@ -1,12 +1,12 @@
 export enum ErrorCodes {
-	unknown = 0,
-	armsTooShort = 1,
-	mountPointOverlap = 2,
+	Unknown = 0,
+	ArmsTooShort = 1,
+	MountPointOverlap = 2,
 }
 
 export enum ErrorHandlingBehavior {
-	continue = 0,
-	stop = 1,
+	Continue = 0,
+	Stop = 1,
 }
 
 export class PintographError extends Error {

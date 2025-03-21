@@ -207,7 +207,7 @@ s	 */
 			} catch (e) {
 				if (e instanceof PintographError && this.onError) {
 					const behavior = this.onError(e.code, undefined);
-					if (behavior === ErrorHandlingBehavior.continue) {
+					if (behavior === ErrorHandlingBehavior.Continue) {
 						console.warn('The device is stuck.', e);
 						pen.reset();
 					}
