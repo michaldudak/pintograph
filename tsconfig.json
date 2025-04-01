@@ -4,18 +4,20 @@
 		"module": "nodenext",
 		"moduleResolution": "nodenext",
 		"moduleDetection": "force",
+
 		"outDir": "./dist",
+		"sourceMap": true,
 		"lib": ["DOM", "ES2022"],
 
 		"declaration": true,
 		"declarationMap": true,
 		"declarationDir": "./dist",
 
+		"strict": true,
 		"useDefineForClassFields": true,
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
-
-		"strict": true,
+		"exactOptionalPropertyTypes": true,
 		"noUnusedLocals": true,
 		"noFallthroughCasesInSwitch": true,
 		"noUncheckedSideEffectImports": true
