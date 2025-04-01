@@ -2,6 +2,7 @@ export * from './EasingFunction.js';
 export * from './MountPoint.js';
 export * from './Oscillator.js';
 export * from './Pen.js';
+export * from './StandardPen.js';
 export * from './SceneObject.js';
 export * from './StaticMountPoint.js';
 export * from './VArm.js';

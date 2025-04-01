@@ -16,48 +16,47 @@ export class Scene {
 	 * The higher the number, the more accurate the simulation, but the slower it will be.
 	 * @default 10
 	 */
-	public stepsPerFrame = 10;
+	stepsPerFrame = 10;
 
 	/**
 	 * The duration of a single frame in seconds.
 	 * This is used to control the frequency of rendering.
 	 * @default 1 / 60
 	 */
-	public frameTime = 1 / 60;
+	frameTime = 1 / 60;
 
 	/**
 	 * The global time scale of the simulation.
 	 * This is used to control the speed of the simulation.
 	 * @default 1
 	 */
-	public timeScale = 1;
+	timeScale = 1;
 
 	/**
 	 * The current simulation time in seconds.
 	 */
-	public simulationTime = 0;
+	simulationTime = 0;
 
 	/**
 	 * Callback that is called when an error occurs.
 	 * The callback should return an ErrorHandlingBehavior that specifies how to handle the error.
 	 */
-	public onError: OnErrorCallback | undefined = undefined;
+	onError: OnErrorCallback | undefined = undefined;
 
 	/**
 	 * Callback that is called when the simulation starts.
 	 */
-	public onStart: (() => void) | undefined = undefined;
+	onStart: (() => void) | undefined = undefined;
 
 	/**
 	 * Callback that is called when the simulation stops.
 	 */
-	public onStop: (() => void) | undefined = undefined;
+	onStop: (() => void) | undefined = undefined;
 
 	/**
 	 * Callback that is called when a frame is drawn.
 	 */
-	public onFrameCompleted: ((elapsedTime: number) => void) | undefined =
-		undefined;
+	onFrameCompleted: ((elapsedTime: number) => void) | undefined = undefined;
 
 	#pens: Set<Pen> = new Set();
 	#isRunning = false;
@@ -78,7 +77,7 @@ export class Scene {
 		this.#isRunning = true;
 
 		this.onStart?.();
-		this.processFrame();
+		this.#processFrame();
 	}
 
 	/**
@@ -105,11 +104,11 @@ export class Scene {
 		this.#isRunning = true;
 
 		for (let i = 0; i < numberOfSteps; ++i) {
-			this.updateObjects(this.simulationTime);
+			this.#updateObjects(this.simulationTime);
 			this.simulationTime += this.frameTime / this.stepsPerFrame;
 		}
 
-		this.draw();
+		this.#draw();
 		this.#isRunning = false;
 	}
 
@@ -128,8 +127,8 @@ export class Scene {
 		}
 
 		this.simulationTime += stepTime * this.timeScale;
-		this.updateObjects(this.simulationTime);
-		this.draw();
+		this.#updateObjects(this.simulationTime);
+		this.#draw();
 
 		this.onFrameCompleted?.(this.simulationTime);
 	}
@@ -156,12 +155,12 @@ export class Scene {
 			pen.reset();
 		}
 
-		this.updateObjects(targetTime);
+		this.#updateObjects(targetTime);
 	}
 
 	/**
 	 * Registers a pen with the scene.
-s	 */
+	 */
 	registerPen(pen: Pen) {
 		this.#pens.add(pen);
 	}
@@ -180,22 +179,22 @@ s	 */
 		return this.#isRunning;
 	}
 
-	private processFrame() {
+	#processFrame() {
 		if (this.#isRunning) {
-			setTimeout(this.processFrame.bind(this), this.frameTime * 1000);
+			setTimeout(this.#processFrame.bind(this), this.frameTime * 1000);
 		}
 
 		for (let i = 0; i < this.stepsPerFrame; ++i) {
-			this.updateObjects(this.simulationTime);
+			this.#updateObjects(this.simulationTime);
 			this.simulationTime +=
 				(this.timeScale * this.frameTime) / this.stepsPerFrame;
 		}
 
-		this.draw();
+		this.#draw();
 		this.onFrameCompleted?.(this.simulationTime);
 	}
 
-	private updateObjects(elapsedTime: number) {
+	#updateObjects(elapsedTime: number) {
 		let timeStep = elapsedTime - this.#previousStepTimestamp;
 		this.#previousStepTimestamp = elapsedTime;
 
@@ -203,7 +202,7 @@ s	 */
 
 		for (let pen of this.#pens) {
 			try {
-				this.updateObjectsInternal(elapsedTime, timeStep, pen, updatedObjects);
+				this.#updateObjectsInternal(elapsedTime, timeStep, pen, updatedObjects);
 			} catch (e) {
 				if (e instanceof PintographError && this.onError) {
 					const behavior = this.onError(e.code, undefined);
@@ -219,7 +218,7 @@ s	 */
 		}
 	}
 
-	private updateObjectsInternal(
+	#updateObjectsInternal(
 		elapsedTime: number,
 		timeStep: number,
 		objectToUpdate: SceneObject,
@@ -231,7 +230,7 @@ s	 */
 
 		let parents = objectToUpdate.getParentMountPoints();
 		for (let i = 0; i < parents.length; ++i) {
-			this.updateObjectsInternal(
+			this.#updateObjectsInternal(
 				elapsedTime,
 				timeStep,
 				parents[i].owner,
@@ -243,7 +242,7 @@ s	 */
 		updatedObjects.add(objectToUpdate);
 	}
 
-	private draw() {
+	#draw() {
 		for (let pen of this.#pens) {
 			pen.draw();
 		}
