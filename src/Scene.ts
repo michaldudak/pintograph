@@ -58,7 +58,8 @@ export class Scene {
 	 */
 	onFrameCompleted: ((elapsedTime: number) => void) | undefined = undefined;
 
-	#pens: Set<Pen> = new Set();
+	private pens: Set<Pen> = new Set();
+
 	#isRunning = false;
 
 	/**
@@ -151,7 +152,7 @@ export class Scene {
 	reset(targetTime = 0) {
 		this.simulationTime = targetTime;
 		this.#previousStepTimestamp = targetTime;
-		for (let pen of this.#pens) {
+		for (let pen of this.pens) {
 			pen.reset();
 		}
 
@@ -162,14 +163,14 @@ export class Scene {
 	 * Registers a pen with the scene.
 	 */
 	registerPen(pen: Pen) {
-		this.#pens.add(pen);
+		this.pens.add(pen);
 	}
 
 	/**
 	 * Removes a pen from the scene.
 	 */
 	unregisterPen(pen: Pen) {
-		this.#pens.delete(pen);
+		this.pens.delete(pen);
 	}
 
 	/**
@@ -200,7 +201,7 @@ export class Scene {
 
 		const updatedObjects = new Set<SceneObject>();
 
-		for (let pen of this.#pens) {
+		for (let pen of this.pens) {
 			try {
 				this.#updateObjectsInternal(elapsedTime, timeStep, pen, updatedObjects);
 			} catch (e) {
@@ -243,7 +244,7 @@ export class Scene {
 	}
 
 	#draw() {
-		for (let pen of this.#pens) {
+		for (let pen of this.pens) {
 			pen.draw();
 		}
 	}
